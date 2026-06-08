@@ -1,0 +1,2499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SF Bay Area: Art Collective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Limelight&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+.page {
+  display:none;
+}
+
+.page.active {
+  display:block;
+}
+
+*,*::before,*::after {
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root {
+  --orange:#be5a15;
+  --orange-mid:#d4713a;
+  --orange-light:#f5ede4;
+  --black:#1a1a1a;
+  --gray-dk:#4a4440;
+  --gray-md:#6b6560;
+  --gray-lt:#e8ddd4;
+  --bg:#faf8f5;
+  --card:#ffffff;
+  --border:#e8ddd4;
+  --radius:8px;
+  --h:'Limelight',cursive;
+  --b:'Open Sans',sans-serif;
+}
+
+body {
+  font-family:var(--b);
+  background:var(--bg);
+  color:var(--black);
+  line-height:1.6;
+}
+
+nav {
+  position:sticky;
+  top:0;
+  z-index:200;
+  background:#fff;
+  border-bottom:2.5px solid var(--orange);
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:0 32px;
+  height:64px;
+}
+
+.logo {
+  font-family:var(--h);
+  font-size:18px;
+  color:var(--orange);
+  cursor:pointer;
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+.logo:hover {
+  color:var(--orange-mid);
+}
+
+.nav-links {
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:24px;
+}
+
+.nl {
+  font-size:14px;
+  font-weight:600;
+  color:var(--gray-dk);
+  cursor:pointer;
+  padding:4px 0;
+  border-bottom:2px solid transparent;
+  background:none;
+  border-top:none;
+  border-left:none;
+  border-right:none;
+  font-family:var(--b);
+  transition:color .15s,border-color .15s;
+}
+
+.nl:hover,.nl.act {
+  color:var(--orange);
+  border-bottom-color:var(--orange);
+}
+
+.nbtn {
+  background:var(--orange);
+  color:#fff;
+  border:none;
+  border-radius:20px;
+  padding:8px 20px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:var(--b);
+}
+
+.nbtn:hover {
+  background:var(--orange-mid);
+}
+
+.car-wrap {
+  background:var(--black);
+  position:relative;
+  overflow:hidden;
+}
+
+.car-track {
+  display:flex;
+  transition:transform .5s cubic-bezier(.25,.46,.45,.94);
+}
+
+.car-slide {
+  min-width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:48px 60px;
+  gap:48px;
+}
+
+.car-inner {
+  max-width:860px;
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:48px;
+}
+
+.cs0 {
+  background:#1e0700;
+}
+
+.cs1 {
+  background:#2d0e04;
+}
+
+.cs2 {
+  background:#3d1608;
+}
+
+.cs3 {
+  background:#541e0a;
+}
+
+.car-ico {
+  width:180px;
+  height:180px;
+  border-radius:12px;
+  flex-shrink:0;
+  overflow:hidden;
+  background:rgba(255,255,255,.12);
+}
+
+.car-ico img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  border-radius:12px;
+}
+
+.car-content {
+  flex:1;
+  color:#fff;
+}
+
+.car-tag {
+  display:inline-block;
+  background:rgba(190,90,21,.5);
+  color:rgba(255,255,255,.9);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:4px 14px;
+  border-radius:20px;
+  margin-bottom:14px;
+}
+
+.car-title {
+  font-family:var(--h);
+  font-size:26px;
+  line-height:1.3;
+  margin-bottom:10px;
+}
+
+.car-desc {
+  font-size:14px;
+  color:rgba(255,255,255,.75);
+  margin-bottom:18px;
+  max-width:500px;
+  line-height:1.6;
+}
+
+.car-foot {
+  display:flex;
+  align-items:center;
+  gap:16px;
+  flex-wrap:wrap;
+}
+
+.car-date {
+  font-size:12px;
+  color:rgba(255,255,255,.55);
+}
+
+.car-cta {
+  background:var(--orange);
+  color:#fff;
+  border:none;
+  border-radius:20px;
+  padding:9px 22px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:var(--b);
+}
+
+.car-cta:hover {
+  background:var(--orange-mid);
+}
+
+.car-arr {
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  background:rgba(255,255,255,.18);
+  border:none;
+  color:#fff;
+  width:40px;
+  height:40px;
+  border-radius:50%;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:22px;
+  transition:background .2s;
+  z-index:10;
+}
+
+.car-arr:hover {
+  background:rgba(255,255,255,.32);
+}
+
+.car-prev {
+  left:18px;
+}
+
+.car-next {
+  right:18px;
+}
+
+.car-dots {
+  position:absolute;
+  bottom:14px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:8px;
+}
+
+.cdot {
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:rgba(255,255,255,.3);
+  border:none;
+  cursor:pointer;
+  transition:all .2s;
+}
+
+.cdot.act {
+  background:var(--orange);
+  transform:scale(1.3);
+}
+
+.cat-nav {
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:13px 32px;
+  border-bottom:1px solid var(--border);
+  background:#fff;
+  position:sticky;
+  top:64px;
+  z-index:90;
+  scrollbar-width:none;
+}
+
+.cat-nav::-webkit-scrollbar {
+  display:none;
+}
+
+.cpill {
+  padding:6px 16px;
+  border-radius:20px;
+  font-size:13px;
+  cursor:pointer;
+  white-space:nowrap;
+  border:1px solid var(--border);
+  background:#fff;
+  color:var(--gray-dk);
+  transition:all .15s;
+  font-family:var(--b);
+  font-weight:500;
+}
+
+.cpill:hover:not(.act) {
+  border-color:var(--orange);
+  color:var(--orange);
+}
+
+.cpill.act {
+  background:var(--orange);
+  color:#fff;
+  border-color:var(--orange);
+}
+
+.home-wrap {
+  max-width:1200px;
+  margin:0 auto;
+  padding:48px 32px;
+  display:grid;
+  grid-template-columns:1fr 296px;
+  gap:56px;
+}
+
+.inner-wrap {
+  max-width:1100px;
+  margin:0 auto;
+  padding:40px 32px;
+}
+
+.section {
+  margin-bottom:52px;
+}
+
+.sec-hd {
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  margin-bottom:22px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+
+.sec-eye {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:3px;
+}
+
+.sec-title {
+  font-family:var(--h);
+  font-size:21px;
+  color:var(--black);
+  letter-spacing:.4px;
+}
+
+.see-all {
+  font-size:13px;
+  color:var(--gray-md);
+  cursor:pointer;
+  background:none;
+  border:none;
+  font-family:var(--b);
+  font-weight:600;
+}
+
+.see-all:hover {
+  color:var(--orange);
+}
+
+.ev-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+
+.ev-card {
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--card);
+  border:1px solid var(--border);
+  cursor:pointer;
+  transition:box-shadow .2s,transform .2s;
+}
+
+.ev-card:hover {
+  box-shadow:0 6px 24px rgba(190,90,21,.13);
+  transform:translateY(-2px);
+}
+
+.ev-img {
+  width:100%;
+  aspect-ratio:4/3;
+  position:relative;
+  overflow:hidden;
+}
+
+.ev-img img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.d-badge {
+  position:absolute;
+  top:10px;
+  left:10px;
+  background:#fff;
+  border-radius:6px;
+  padding:6px 10px;
+  text-align:center;
+  box-shadow:0 2px 6px rgba(0,0,0,.18);
+  min-width:58px;
+}
+
+.d-num {
+  display:block;
+  font-size:22px;
+  font-weight:700;
+  line-height:1;
+  font-family:var(--b);
+}
+
+.d-away {
+  display:block;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:.8px;
+  text-transform:uppercase;
+  color:var(--gray-md);
+  margin-top:1px;
+}
+
+.d-date {
+  display:block;
+  font-size:10px;
+  font-weight:600;
+  color:var(--gray-md);
+  margin-top:2px;
+}
+
+.badge-now .d-num {
+  color:#c0392b;
+}
+
+.badge-soon .d-num {
+  color:var(--orange);
+}
+
+.badge-far .d-num {
+  color:var(--gray-dk);
+}
+
+.badge-now {
+  border-left:3px solid #c0392b;
+}
+
+.badge-soon {
+  border-left:3px solid var(--orange);
+}
+
+.badge-far {
+  border-left:3px solid #bdc3c7;
+}
+
+.ev-body {
+  padding:16px;
+}
+
+.ev-cat {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:5px;
+}
+
+.ev-name {
+  font-family:var(--h);
+  font-size:14px;
+  color:var(--black);
+  margin-bottom:7px;
+  line-height:1.4;
+}
+
+.ev-loc {
+  font-size:12px;
+  color:var(--gray-md);
+}
+
+.g1,.g2,.g3,.g4,.g5,.g6 {
+  background:#2d0e04;
+}
+
+.gp1,.gp2 {
+  background:#3d2820;
+}
+
+.ar-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.ar-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:22px 16px;
+  cursor:pointer;
+  transition:box-shadow .2s,transform .2s;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.ar-card:hover {
+  box-shadow:0 6px 24px rgba(190,90,21,.13);
+  transform:translateY(-2px);
+}
+
+.ar-av {
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  margin-bottom:12px;
+  flex-shrink:0;
+  overflow:hidden;
+  border:2px solid var(--border);
+}
+
+.ar-av img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.ar-name {
+  font-family:var(--h);
+  font-size:13px;
+  color:var(--black);
+  margin-bottom:4px;
+  letter-spacing:.3px;
+  line-height:1.3;
+}
+
+.ar-med {
+  font-size:12px;
+  color:var(--gray-md);
+  margin-bottom:10px;
+}
+
+.chips {
+  display:flex;
+  flex-wrap:wrap;
+  gap:4px;
+  justify-content:center;
+}
+
+.chip {
+  font-size:10px;
+  font-weight:600;
+  padding:3px 8px;
+  background:var(--orange-light);
+  color:var(--orange);
+  border-radius:20px;
+}
+
+.past-list {
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+
+.past-card {
+  display:flex;
+  gap:16px;
+  padding:16px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  cursor:pointer;
+  transition:box-shadow .2s;
+}
+
+.past-card:hover {
+  box-shadow:0 4px 16px rgba(0,0,0,.08);
+}
+
+.past-img {
+  width:76px;
+  height:76px;
+  border-radius:6px;
+  flex-shrink:0;
+  overflow:hidden;
+}
+
+.past-img img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.past-date {
+  font-size:12px;
+  color:var(--gray-md);
+  margin-bottom:4px;
+}
+
+.past-name {
+  font-family:var(--h);
+  font-size:14px;
+  color:var(--gray-dk);
+  margin-bottom:4px;
+}
+
+.past-sub {
+  font-size:12px;
+  color:var(--gray-md);
+  line-height:1.4;
+}
+
+.sb-label {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--orange);
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:14px;
+}
+
+.sb-sec {
+  margin-bottom:32px;
+}
+
+.sp-row {
+  display:flex;
+  gap:12px;
+  margin-bottom:14px;
+  padding-bottom:14px;
+  border-bottom:1px solid var(--bg);
+  cursor:pointer;
+  transition:opacity .15s;
+}
+
+.sp-row:last-child {
+  border-bottom:none;
+  margin-bottom:0;
+  padding-bottom:0;
+}
+
+.sp-row:hover {
+  opacity:.75;
+}
+
+.sp-ico {
+  width:46px;
+  height:46px;
+  border-radius:6px;
+  flex-shrink:0;
+  overflow:hidden;
+}
+
+.sp-ico img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.sp-name {
+  font-family:var(--h);
+  font-size:12px;
+  color:var(--black);
+  margin-bottom:2px;
+}
+
+.sp-sub {
+  font-size:11px;
+  color:var(--gray-md);
+}
+
+.topic-pills {
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+}
+
+.tpill {
+  padding:7px 14px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  font-size:13px;
+  color:var(--gray-dk);
+  cursor:pointer;
+  font-family:var(--b);
+  transition:all .15s;
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+}
+
+.tpill:hover {
+  border-color:var(--orange);
+  color:var(--orange);
+  background:var(--orange-light);
+}
+
+.apply-row {
+  display:block;
+  padding:11px 14px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin-bottom:8px;
+  cursor:pointer;
+  transition:background .15s;
+}
+
+.apply-row:hover {
+  background:var(--orange-light);
+}
+
+.apply-row.urg {
+  background:#fff8f4;
+  border-color:#f5c4a4;
+}
+
+.arow-name {
+  font-size:13px;
+  font-weight:600;
+  color:var(--black);
+}
+
+.arow-name.o {
+  color:var(--orange);
+}
+
+.arow-sub {
+  font-size:11px;
+  color:var(--gray-md);
+  margin-top:2px;
+}
+
+.nl-input {
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+}
+
+.nl-input input {
+  flex:1;
+  padding:9px 12px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  font-size:13px;
+  font-family:var(--b);
+  outline:none;
+}
+
+.nl-input input:focus {
+  border-color:var(--orange);
+}
+
+.nl-input button {
+  background:var(--orange);
+  color:#fff;
+  border:none;
+  border-radius:var(--radius);
+  padding:9px 16px;
+  font-size:13px;
+  font-weight:600;
+  cursor:pointer;
+  font-family:var(--b);
+}
+
+.sb-body-text {
+  font-size:13px;
+  color:var(--gray-dk);
+  line-height:1.5;
+  margin-bottom:10px;
+}
+
+.back-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  font-size:13px;
+  font-weight:600;
+  color:var(--orange);
+  cursor:pointer;
+  background:none;
+  border:none;
+  font-family:var(--b);
+  margin-bottom:22px;
+  transition:opacity .15s;
+  padding:0;
+}
+
+.back-btn:hover {
+  opacity:.7;
+}
+
+.page-hero {
+  border-radius:12px;
+  padding:44px;
+  margin-bottom:36px;
+  display:flex;
+  gap:28px;
+  align-items:flex-start;
+  background:#1e0700;
+}
+
+.hero-ico {
+  width:130px;
+  height:130px;
+  border-radius:12px;
+  background:rgba(255,255,255,.14);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:60px;
+  flex-shrink:0;
+}
+
+.hero-cnt {
+  flex:1;
+  color:#fff;
+}
+
+.hero-tag {
+  display:inline-block;
+  background:rgba(190,90,21,.45);
+  color:rgba(255,255,255,.9);
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:4px 14px;
+  border-radius:20px;
+  margin-bottom:12px;
+}
+
+.hero-title {
+  font-family:var(--h);
+  font-size:30px;
+  line-height:1.25;
+  margin-bottom:10px;
+}
+
+.hero-meta {
+  font-size:14px;
+  color:rgba(255,255,255,.7);
+  margin-bottom:6px;
+}
+
+.hero-desc {
+  font-size:14px;
+  color:rgba(255,255,255,.82);
+  line-height:1.65;
+  max-width:560px;
+  margin-top:10px;
+}
+
+.detail-body {
+  display:grid;
+  grid-template-columns:1fr 280px;
+  gap:36px;
+}
+
+.det-main {}
+
+.det-side {}
+
+.det-sec {
+  margin-bottom:32px;
+}
+
+.det-sec-title {
+  font-family:var(--h);
+  font-size:17px;
+  color:var(--black);
+  margin-bottom:14px;
+  padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+
+.info-row {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:24px;
+}
+
+.info-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:16px;
+  text-align:center;
+}
+
+.ic-ico {
+  font-size:22px;
+  margin-bottom:5px;
+}
+
+.ic-lbl {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--gray-md);
+  margin-bottom:3px;
+}
+
+.ic-val {
+  font-size:13px;
+  font-weight:600;
+  color:var(--black);
+}
+
+.vendor-box {
+  background:var(--orange-light);
+  border:1px solid #e8c4a4;
+  border-radius:var(--radius);
+  padding:20px;
+}
+
+.vr {
+  display:flex;
+  gap:10px;
+  align-items:flex-start;
+  margin-bottom:10px;
+}
+
+.vr:last-child {
+  margin-bottom:0;
+}
+
+.vr-lbl {
+  font-size:11px;
+  font-weight:700;
+  color:var(--orange);
+  width:90px;
+  flex-shrink:0;
+  padding-top:1px;
+}
+
+.vr-val {
+  font-size:13px;
+  color:var(--black);
+}
+
+.apply-btn {
+  width:100%;
+  background:var(--orange);
+  color:#fff;
+  border:none;
+  border-radius:var(--radius);
+  padding:14px;
+  font-size:14px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:var(--b);
+  margin-top:16px;
+}
+
+.apply-btn:hover {
+  background:var(--orange-mid);
+}
+
+.topics-list {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.det-chip {
+  padding:6px 14px;
+  background:var(--orange-light);
+  color:var(--orange);
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+}
+
+.ar-detail-hd {
+  display:flex;
+  gap:24px;
+  align-items:flex-start;
+  padding:36px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:12px;
+  margin-bottom:32px;
+}
+
+.adh-av {
+  width:96px;
+  height:96px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid var(--border);
+  flex-shrink:0;
+}
+
+.adh-av img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+.adh-name {
+  font-family:var(--h);
+  font-size:26px;
+  color:var(--black);
+  margin-bottom:5px;
+}
+
+.adh-med {
+  font-size:14px;
+  color:var(--orange);
+  font-weight:600;
+  margin-bottom:4px;
+}
+
+.adh-loc {
+  font-size:13px;
+  color:var(--gray-md);
+  margin-bottom:12px;
+}
+
+.adh-topics {
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+}
+
+.social-tag {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:6px 14px;
+  font-size:13px;
+  color:var(--gray-dk);
+  margin-top:14px;
+}
+
+.works-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.work-cell {
+  aspect-ratio:1;
+  border-radius:var(--radius);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:48px;
+  background:var(--bg);
+  border:1px solid var(--border);
+}
+
+.ev-att-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.ev-att {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:14px;
+  cursor:pointer;
+  transition:background .15s;
+}
+
+.ev-att:hover {
+  background:var(--orange-light);
+}
+
+.ev-att-name {
+  font-family:var(--h);
+  font-size:12px;
+  color:var(--black);
+  margin-bottom:4px;
+}
+
+.ev-att-date {
+  font-size:11px;
+  color:var(--gray-md);
+}
+
+.pg-header {
+  margin-bottom:28px;
+}
+
+.pg-title {
+  font-family:var(--h);
+  font-size:28px;
+  color:var(--black);
+  margin-bottom:5px;
+}
+
+.pg-sub {
+  font-size:14px;
+  color:var(--gray-md);
+}
+
+.filter-bar {
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:28px;
+  padding-bottom:16px;
+  border-bottom:1px solid var(--border);
+  align-items:center;
+}
+
+.fl {
+  font-size:12px;
+  font-weight:700;
+  color:var(--gray-md);
+  margin-right:4px;
+}
+
+.fpill {
+  padding:6px 15px;
+  border-radius:20px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--gray-dk);
+  font-size:13px;
+  cursor:pointer;
+  font-family:var(--b);
+  transition:all .15s;
+}
+
+.fpill:hover:not(.act) {
+  border-color:var(--orange);
+  color:var(--orange);
+}
+
+.fpill.act {
+  background:var(--orange);
+  color:#fff;
+  border-color:var(--orange);
+}
+
+.ann-card {
+  display:flex;
+  gap:18px;
+  padding:22px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  margin-bottom:14px;
+}
+
+.ann-ico {
+  width:52px;
+  height:52px;
+  border-radius:10px;
+  background:var(--orange-light);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:24px;
+  flex-shrink:0;
+}
+
+.ann-tag {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1.2px;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:4px;
+}
+
+.ann-title {
+  font-family:var(--h);
+  font-size:15px;
+  color:var(--black);
+  margin-bottom:6px;
+}
+
+.ann-desc {
+  font-size:13px;
+  color:var(--gray-dk);
+  line-height:1.5;
+  margin-bottom:10px;
+}
+
+.ann-cta {
+  background:var(--orange);
+  color:#fff;
+  border:none;
+  border-radius:20px;
+  padding:7px 18px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:var(--b);
+}
+
+.res-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
+  margin-bottom:32px;
+}
+
+.res-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+}
+
+.res-ico {
+  font-size:30px;
+  margin-bottom:10px;
+}
+
+.res-title {
+  font-family:var(--h);
+  font-size:15px;
+  color:var(--black);
+  margin-bottom:10px;
+}
+
+.res-items {
+  list-style:none;
+}
+
+.res-items li {
+  font-size:13px;
+  color:var(--gray-dk);
+  padding:5px 0;
+  border-bottom:1px solid var(--bg);
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.res-items li:last-child {
+  border-bottom:none;
+}
+
+.res-items li::before {
+  content:"→";
+  color:var(--orange);
+  font-weight:bold;
+}
+
+.sub-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:16px;
+}
+
+.sub-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:24px;
+  text-align:center;
+}
+
+.sub-ico {
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+.sub-title {
+  font-family:var(--h);
+  font-size:14px;
+  color:var(--black);
+  margin-bottom:6px;
+}
+
+.sub-desc {
+  font-size:12px;
+  color:var(--gray-md);
+  margin-bottom:14px;
+  line-height:1.4;
+}
+
+.sub-btn {
+  background:var(--orange);
+  color:#fff;
+  border:none;
+  border-radius:20px;
+  padding:8px 20px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:var(--b);
+}
+
+.av1 {
+  background:#c0392b;
+}
+
+.av2 {
+  background:#d4872a;
+}
+
+.av3 {
+  background:#8e44ad;
+}
+
+.av4 {
+  background:#2980b9;
+}
+
+.av5 {
+  background:#27ae60;
+}
+
+.av6 {
+  background:#be5a15;
+}
+
+footer {
+  border-top:1px solid var(--border);
+  padding:24px 32px;
+  text-align:center;
+  font-size:12px;
+  color:var(--gray-md);
+  background:#fff;
+}
+
+footer button {
+  background:none;
+  border:none;
+  color:var(--gray-md);
+  font-size:12px;
+  cursor:pointer;
+  margin:0 8px;
+  font-family:var(--b);
+}
+
+footer button:hover {
+  color:var(--orange);
+}
+
+.involve-form {
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  max-width:600px;
+}
+
+.involve-row {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.involve-input {
+  width:100%;
+  padding:11px 14px;
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  font-family:var(--b);
+  font-size:13px;
+  background:var(--card);
+  color:var(--black);
+  outline:none;
+  resize:vertical;
+}
+
+.involve-input:focus {
+  border-color:var(--orange);
+}
+
+.involve-ta {
+  min-height:120px;
+}
+
+.involve-btn {
+  align-self:flex-start;
+  background:var(--orange);
+  color:#fff;
+  border:none;
+  border-radius:var(--radius);
+  padding:11px 28px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  font-family:var(--b);
+}
+
+.involve-btn:hover {
+  background:var(--orange-mid);
+}
+
+.footer-nav {
+  margin-bottom:8px;
+}
+
+.ev-grid-page {
+  margin-bottom:52px;
+}
+
+.sec-hd-flat {
+  margin-bottom:20px;
+}
+
+.empty-state {
+  color:var(--gray-md);
+  padding:20px 0;
+}
+
+.days-tag {
+  display:inline-block;
+  margin-left:12px;
+  background:rgba(255,255,255,.2);
+  border-radius:20px;
+  padding:5px 14px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.days-tag-past {
+  font-weight:400;
+}
+
+.vr-val-accent {
+  font-weight:600;
+  color:var(--orange);
+}
+
+.body-text {
+  font-size:14px;
+  color:var(--gray-dk);
+  line-height:1.75;
+  margin-bottom:16px;
+}
+
+.meta-list {
+  font-size:13px;
+  color:var(--gray-dk);
+  line-height:2;
+}
+
+.spotlight-box {
+  background:var(--orange-light);
+  border-left:3px solid var(--orange);
+  padding:16px 18px;
+  border-radius:0 var(--radius) var(--radius) 0;
+}
+
+.spotlight-label {
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--orange);
+  margin-bottom:6px;
+}
+
+.spotlight-text {
+  font-size:13px;
+  color:var(--gray-dk);
+  line-height:1.65;
+  font-style:italic;
+}
+
+.works-caption {
+  font-size:12px;
+  color:var(--gray-md);
+  margin-top:10px;
+}
+
+.ev-att-ico {
+  font-size:22px;
+  margin-bottom:6px;
+}
+
+.topic-col {
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.tpill-left {
+  justify-content:flex-start;
+}
+
+.ar-av-sm {
+  width:40px;
+  height:40px;
+}
+
+.ev-att-ico {
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:var(--radius);
+  overflow:hidden;
+  margin-bottom:6px;
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="logo" onclick="nav('page-home')">SF Bay Area: Art Collective</span>
+  <div class="nav-links">
+    <button class="nl" id="nl-events" onclick="nav('page-events')">Events</button>
+    <button class="nl" id="nl-artists" onclick="nav('page-artists')">Artists</button>
+    <button class="nbtn" onclick="nav('page-community')">Join</button>
+  </div>
+</nav>
+
+<!-- ══ HOME ══ -->
+<div id="page-home" class="page active">
+  <div class="car-wrap">
+    <button class="car-arr car-prev" onclick="carMove(-1)">&#8249;</button>
+    <div class="car-track" id="carTrack">
+      <div class="car-slide cs0">
+  <div class="car-inner">
+    <div class="car-ico"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=300&h=300&fit=crop&auto=format" alt="Apply to ILLO Mart 2026 — Deadline June 30!" loading="lazy"></div>
+    <div class="car-content">
+      <div class="car-tag">Vendor Applications Open</div>
+      <div class="car-title">Apply to ILLO Mart 2026 — Deadline June 30!</div>
+      <div class="car-desc">A celebration of illustration & the creative community. 275 illustrators, workshops, and talks at South Hall, Downtown San José. Free admission for attendees.</div>
+      <div class="car-foot"><span class="car-date">September 26–27, 2026 · South Hall, Downtown SJ</span><button class="car-cta" onclick="nav('page-event-detail-illo-mart')">View Event →</button></div>
+    </div>
+  </div>
+</div><div class="car-slide cs1">
+  <div class="car-inner">
+    <div class="car-ico"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=300&h=300&fit=crop&auto=format" alt="SJMADE Summer Fair Returns — August 8–9" loading="lazy"></div>
+    <div class="car-content">
+      <div class="car-tag">Save the Date</div>
+      <div class="car-title">SJMADE Summer Fair Returns — August 8–9</div>
+      <div class="car-desc">200+ makers, artists, designers, chefs, and bakers at one of the Bay Area's most beloved summer outdoor markets. Free admission. Perfect for discovering new artists and small businesses.</div>
+      <div class="car-foot"><span class="car-date">August 8–9, 2026 · San José, CA</span><button class="car-cta" onclick="nav('page-event-detail-sjmade-summer-fair')">View Event →</button></div>
+    </div>
+  </div>
+</div><div class="car-slide cs2">
+  <div class="car-inner">
+    <div class="car-ico"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=300&h=300&fit=crop&auto=format" alt="FAN EXPO SF Artist Alley — Apply Now" loading="lazy"></div>
+    <div class="car-content">
+      <div class="car-tag">Artist Alley Now Open</div>
+      <div class="car-title">FAN EXPO SF Artist Alley — Apply Now</div>
+      <div class="car-desc">Share one-of-a-kind artwork, sculptures, jewelry, pins and buttons at Moscone Center West. Standard spaces from $390. Join the waitlist today.</div>
+      <div class="car-foot"><span class="car-date">November 27–29, 2026 · Moscone Center West, SF</span><button class="car-cta" onclick="nav('page-event-detail-fan-expo-sf')">View Event →</button></div>
+    </div>
+  </div>
+</div><div class="car-slide cs3">
+  <div class="car-inner">
+    <div class="car-ico"><img src="https://images.unsplash.com/photo-1511795267800-a16a814c6b2e?w=300&h=300&fit=crop&auto=format" alt="SJMADE Holiday Fair — Nov 27–28, 2026" loading="lazy"></div>
+    <div class="car-content">
+      <div class="car-tag">Largest Holiday Fair in the Bay Area</div>
+      <div class="car-title">SJMADE Holiday Fair — Nov 27–28, 2026</div>
+      <div class="car-desc">350+ makers, artists, designers, creators, bakers, crafters and creative small businesses. Fun festive activities and activation stations. Santa Clara Convention Center.</div>
+      <div class="car-foot"><span class="car-date">November 27–28, 2026 · Santa Clara Convention Center</span><button class="car-cta" onclick="nav('page-event-detail-sjmade-holiday-fair')">View Event →</button></div>
+    </div>
+  </div>
+</div>
+    </div>
+    <button class="car-arr car-next" onclick="carMove(1)">&#8250;</button>
+    <div class="car-dots" id="carDots"><button class="cdot act" onclick="carGo(0)"></button><button class="cdot" onclick="carGo(1)"></button><button class="cdot" onclick="carGo(2)"></button><button class="cdot" onclick="carGo(3)"></button></div>
+  </div>
+  <div class="home-wrap">
+    <div>
+      <div class="section">
+        <div class="sec-hd"><div><div class="sec-eye">What's Happening</div><div class="sec-title">Upcoming Events</div></div><button class="see-all" onclick="nav('page-events')">See all →</button></div>
+        <div class="ev-grid"><div class="ev-card" data-topics="Illustration,Crafts & Fiber,Sticker Art,Jewelry,Printmaking" onclick="nav('page-event-detail-little-shops-july')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=600&h=400&fit=crop&auto=format" alt="Little Shops Village" loading="lazy"><div class="d-badge" data-date="2026-07-10"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Craft Market</div><div class="ev-name">Little Shops Village</div><div class="ev-loc">Cityline Sunnyvale</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Ceramics,Sticker Art,Jewelry,Crafts & Fiber,Printmaking" onclick="nav('page-event-detail-sjmade-summer-fair')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&h=400&fit=crop&auto=format" alt="SJMADE Summer Fair 2026" loading="lazy"><div class="d-badge" data-date="2026-08-08"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Craft Fair</div><div class="ev-name">SJMADE Summer Fair 2026</div><div class="ev-loc">San José, CA</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Printmaking,Sticker Art" onclick="nav('page-event-detail-illo-mart')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=400&fit=crop&auto=format" alt="ILLO Mart 2026" loading="lazy"><div class="d-badge" data-date="2026-09-26"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Illustration Fair</div><div class="ev-name">ILLO Mart 2026</div><div class="ev-loc">South Hall, Downtown SJ</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Sticker Art,Printmaking" onclick="nav('page-event-detail-anime-impulse')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&auto=format" alt="ANIME Impulse + K-PLAY! FEST" loading="lazy"><div class="d-badge" data-date="2026-07-18"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Convention</div><div class="ev-name">ANIME Impulse + K-PLAY! FEST</div><div class="ev-loc">Santa Clara Convention Center</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Ceramics,Sticker Art,Jewelry,Crafts & Fiber,Printmaking" onclick="nav('page-event-detail-sjmade-holiday-fair')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1511795267800-a16a814c6b2e?w=600&h=400&fit=crop&auto=format" alt="SJMADE Holiday Fair 2026" loading="lazy"><div class="d-badge" data-date="2026-11-27"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Holiday Fair</div><div class="ev-name">SJMADE Holiday Fair 2026</div><div class="ev-loc">Santa Clara Convention Center</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Sticker Art,Printmaking,Crafts & Fiber" onclick="nav('page-event-detail-fan-expo-sf')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=600&h=400&fit=crop&auto=format" alt="FAN EXPO San Francisco — Artist Alley" loading="lazy"><div class="d-badge" data-date="2026-11-27"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Convention</div><div class="ev-name">FAN EXPO San Francisco — Artist Alley</div><div class="ev-loc">Moscone Center West, SF</div></div>
+</div></div>
+      </div>
+      <div class="section">
+        <div class="sec-hd"><div><div class="sec-eye">Meet the Makers</div><div class="sec-title">Featured Artists</div></div><button class="see-all" onclick="nav('page-artists')">See all →</button></div>
+        <div class="ar-grid"><div class="ar-card" data-topics="Illustration,Printmaking" onclick="nav('page-artist-detail-juanita-vasquez')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div>
+  <div class="ar-name">Juanita Vasquez Illustration</div>
+  <div class="ar-med">Illustration</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Printmaking</span></div>
+</div>
+<div class="ar-card" data-topics="Ceramics" onclick="nav('page-artist-detail-alex-beck-ceramics')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div>
+  <div class="ar-name">Alex Beck Ceramics</div>
+  <div class="ar-med">Ceramics</div>
+  <div class="chips"><span class="chip">Ceramics</span></div>
+</div>
+<div class="ar-card" data-topics="Illustration,Sticker Art" onclick="nav('page-artist-detail-naptime-doodler')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div>
+  <div class="ar-name">Naptime Doodler</div>
+  <div class="ar-med">Illustration · Sticker Art</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Sticker Art</span></div>
+</div>
+<div class="ar-card" data-topics="Sticker Art,Illustration" onclick="nav('page-artist-detail-tokyo-shojo')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=200&h=200&fit=crop&auto=format" alt="Tokyo Shojo" loading="lazy"></div>
+  <div class="ar-name">Tokyo Shojo</div>
+  <div class="ar-med">Sticker Art · Anime Goods</div>
+  <div class="chips"><span class="chip">Sticker Art</span><span class="chip">Illustration</span></div>
+</div>
+<div class="ar-card" data-topics="Printmaking,Illustration" onclick="nav('page-artist-detail-panda-prints-paper')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=200&h=200&fit=crop&auto=format" alt="Panda Prints Paper" loading="lazy"></div>
+  <div class="ar-name">Panda Prints Paper</div>
+  <div class="ar-med">Printmaking · Stationery</div>
+  <div class="chips"><span class="chip">Printmaking</span><span class="chip">Illustration</span></div>
+</div>
+<div class="ar-card" data-topics="Jewelry,Crafts & Fiber" onclick="nav('page-artist-detail-meraki-strokes')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&h=200&fit=crop&auto=format" alt="Meraki Strokes" loading="lazy"></div>
+  <div class="ar-name">Meraki Strokes</div>
+  <div class="ar-med">Jewelry · Mixed Media</div>
+  <div class="chips"><span class="chip">Jewelry</span><span class="chip">Crafts & Fiber</span></div>
+</div></div>
+      </div>
+      <div class="section">
+        <div class="sec-hd"><div><div class="sec-eye">Event Archive</div><div class="sec-title">Past Events</div></div></div>
+        <div class="past-list"><div class="past-card" onclick="nav('page-event-detail-sjmade-fest-2026')">
+  <div class="past-img"><img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=200&h=200&fit=crop&auto=format" alt="SJMADE Fest 2026" loading="lazy"></div>
+  <div><div class="past-date">May 30–31, 2026 · History Park San José</div><div class="past-name">SJMADE Fest 2026</div><div class="past-sub">San José Made's largest outdoor event returned at History Park with 250+ makers. Highlights: Kitten …</div></div>
+</div>
+<div class="past-card" onclick="nav('page-event-detail-sf-art-fair-2026')">
+  <div class="past-img"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=200&h=200&fit=crop&auto=format" alt="San Francisco Art Fair 2026" loading="lazy"></div>
+  <div><div class="past-date">April 16–19, 2026 · Fort Mason Festival Pavilion</div><div class="past-name">San Francisco Art Fair 2026</div><div class="past-sub">85 leading galleries from around the world presented modern and contemporary art. The fair's 14th ed…</div></div>
+</div>
+<div class="past-card" onclick="nav('page-event-detail-night-market-june')">
+  <div class="past-img"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=200&fit=crop&auto=format" alt="Celebrate Santa Clara Night Market (June)" loading="lazy"></div>
+  <div><div class="past-date">June 5–6, 2026 · Santa Clara</div><div class="past-name">Celebrate Santa Clara Night Market (June)</div><div class="past-sub">The summer kick-off edition of the Santa Clara Night Market brought together local makers, food vend…</div></div>
+</div></div>
+      </div>
+    </div>
+    <aside>
+  <div class="sb-sec"><div class="sb-label">Staff Picks</div><div class="sp-row" onclick="nav('page-artist-detail-naptime-doodler')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div><div><div class="sp-name">Naptime Doodler</div><div class="sp-sub">Illustration · Sticker Art</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-alex-beck-ceramics')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div><div><div class="sp-name">Alex Beck Ceramics</div><div class="sp-sub">Ceramics</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-panda-prints-paper')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=200&h=200&fit=crop&auto=format" alt="Panda Prints Paper" loading="lazy"></div><div><div class="sp-name">Panda Prints Paper</div><div class="sp-sub">Printmaking · Stationery</div></div></div></div>
+  <div class="sb-sec"><div class="sb-label">Browse by Topic</div><div class="topic-pills"><button class="tpill" onclick="nav('page-artists');filterPage('page-artists','Illustration')">Illustration</button><button class="tpill" onclick="nav('page-artists');filterPage('page-artists','Sticker Art')">Sticker Art</button><button class="tpill" onclick="nav('page-artists');filterPage('page-artists','Ceramics')">Ceramics</button><button class="tpill" onclick="nav('page-artists');filterPage('page-artists','Jewelry')">Jewelry</button><button class="tpill" onclick="nav('page-artists');filterPage('page-artists','Printmaking')">Printmaking</button><button class="tpill" onclick="nav('page-artists');filterPage('page-artists','Crafts & Fiber')">Crafts & Fiber</button></div></div>
+  <div class="sb-sec"><div class="sb-label">Apply to Vend</div><div class="apply-row urg" onclick="nav('page-event-detail-illo-mart')"><div class="arow-name o">ILLO Mart · Deadline Jun 30!</div><div class="arow-sub">Sep 26–27 · South Hall, Downtown SJ</div></div><div class="apply-row" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="arow-name">SJMADE Summer Fair · Aug 8–9</div><div class="arow-sub">San José, CA</div></div><div class="apply-row" onclick="nav('page-event-detail-fan-expo-sf')"><div class="arow-name">FAN EXPO SF Artist Alley</div><div class="arow-sub">Nov 27–29 · Moscone Center West</div></div></div>
+  <div class="sb-sec"><div class="sb-label">Newsletter</div><div class="sb-body-text">Event updates, vendor opportunities, and artist spotlights delivered to your inbox.</div><div class="nl-input"><input type="email" placeholder="your@email.com"><button>Join</button></div></div>
+</aside>
+  </div>
+</div>
+
+<!-- ══ EVENTS LIST ══ -->
+<div id="page-events" class="page">
+  <div class="inner-wrap">
+    <div class="pg-header"><div class="pg-title">Upcoming Events</div><div class="pg-sub">Bay Area art markets, craft fairs, conventions &amp; more</div></div>
+    <div class="filter-bar"><span class="fl">Filter:</span><button class="fpill  act" onclick="filterPage('page-events',null)">All</button><button class="fpill" onclick="filterPage('page-events','Illustration')">Illustration</button><button class="fpill" onclick="filterPage('page-events','Sticker Art')">Sticker Art</button><button class="fpill" onclick="filterPage('page-events','Ceramics')">Ceramics</button><button class="fpill" onclick="filterPage('page-events','Jewelry')">Jewelry</button><button class="fpill" onclick="filterPage('page-events','Printmaking')">Printmaking</button><button class="fpill" onclick="filterPage('page-events','Crafts & Fiber')">Crafts & Fiber</button></div>
+    <div class="ev-grid ev-grid-page" id="page-events-grid"><div class="ev-card" data-topics="Illustration,Crafts & Fiber,Sticker Art,Jewelry,Printmaking" onclick="nav('page-event-detail-little-shops-july')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=600&h=400&fit=crop&auto=format" alt="Little Shops Village" loading="lazy"><div class="d-badge" data-date="2026-07-10"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Craft Market</div><div class="ev-name">Little Shops Village</div><div class="ev-loc">Cityline Sunnyvale</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Ceramics,Sticker Art,Jewelry,Crafts & Fiber,Printmaking" onclick="nav('page-event-detail-sjmade-summer-fair')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&h=400&fit=crop&auto=format" alt="SJMADE Summer Fair 2026" loading="lazy"><div class="d-badge" data-date="2026-08-08"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Craft Fair</div><div class="ev-name">SJMADE Summer Fair 2026</div><div class="ev-loc">San José, CA</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Printmaking,Sticker Art" onclick="nav('page-event-detail-illo-mart')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=400&fit=crop&auto=format" alt="ILLO Mart 2026" loading="lazy"><div class="d-badge" data-date="2026-09-26"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Illustration Fair</div><div class="ev-name">ILLO Mart 2026</div><div class="ev-loc">South Hall, Downtown SJ</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Sticker Art,Printmaking" onclick="nav('page-event-detail-anime-impulse')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&auto=format" alt="ANIME Impulse + K-PLAY! FEST" loading="lazy"><div class="d-badge" data-date="2026-07-18"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Convention</div><div class="ev-name">ANIME Impulse + K-PLAY! FEST</div><div class="ev-loc">Santa Clara Convention Center</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Ceramics,Sticker Art,Jewelry,Crafts & Fiber,Printmaking" onclick="nav('page-event-detail-sjmade-holiday-fair')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1511795267800-a16a814c6b2e?w=600&h=400&fit=crop&auto=format" alt="SJMADE Holiday Fair 2026" loading="lazy"><div class="d-badge" data-date="2026-11-27"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Holiday Fair</div><div class="ev-name">SJMADE Holiday Fair 2026</div><div class="ev-loc">Santa Clara Convention Center</div></div>
+</div>
+<div class="ev-card" data-topics="Illustration,Sticker Art,Printmaking,Crafts & Fiber" onclick="nav('page-event-detail-fan-expo-sf')">
+  <div class="ev-img"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=600&h=400&fit=crop&auto=format" alt="FAN EXPO San Francisco — Artist Alley" loading="lazy"><div class="d-badge" data-date="2026-11-27"><span class="d-num">?</span><span class="d-away">days away</span><span class="d-date"></span></div></div>
+  <div class="ev-body"><div class="ev-cat">Convention</div><div class="ev-name">FAN EXPO San Francisco — Artist Alley</div><div class="ev-loc">Moscone Center West, SF</div></div>
+</div></div>
+    <div class="sec-hd sec-hd-flat"><div><div class="sec-eye">Event Archive</div><div class="sec-title">Past Events</div></div></div>
+    <div class="past-list" id="page-events-past"><div class="past-card" onclick="nav('page-event-detail-sjmade-fest-2026')">
+  <div class="past-img"><img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=200&h=200&fit=crop&auto=format" alt="SJMADE Fest 2026" loading="lazy"></div>
+  <div><div class="past-date">May 30–31, 2026 · History Park San José</div><div class="past-name">SJMADE Fest 2026</div><div class="past-sub">San José Made's largest outdoor event returned at History Park with 250+ makers. Highlights: Kitten Lounge by …</div></div>
+</div>
+<div class="past-card" onclick="nav('page-event-detail-sf-art-fair-2026')">
+  <div class="past-img"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=200&h=200&fit=crop&auto=format" alt="San Francisco Art Fair 2026" loading="lazy"></div>
+  <div><div class="past-date">April 16–19, 2026 · Fort Mason Festival Pavilion</div><div class="past-name">San Francisco Art Fair 2026</div><div class="past-sub">85 leading galleries from around the world presented modern and contemporary art. The fair's 14th edition feat…</div></div>
+</div>
+<div class="past-card" onclick="nav('page-event-detail-night-market-june')">
+  <div class="past-img"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=200&h=200&fit=crop&auto=format" alt="Celebrate Santa Clara Night Market (June)" loading="lazy"></div>
+  <div><div class="past-date">June 5–6, 2026 · Santa Clara</div><div class="past-name">Celebrate Santa Clara Night Market (June)</div><div class="past-sub">The summer kick-off edition of the Santa Clara Night Market brought together local makers, food vendors, and a…</div></div>
+</div></div>
+  </div>
+</div>
+
+<!-- ══ EVENT DETAIL PAGES ══ -->
+<div id="page-event-detail-little-shops-july" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-events')">← Back to Events</button>
+  <div class="page-hero">
+    <div class="hero-ico"><img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=600&h=400&fit=crop&auto=format" alt="Little Shops Village" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">Craft Market<span class="days-tag" data-date="2026-07-10">In ? days</span></div>
+      <div class="hero-title">Little Shops Village</div>
+      <div class="hero-meta">July 10–11, 2026 · 4:00 PM – 9:00 PM</div>
+      <div class="hero-meta">Cityline Sunnyvale, Sunnyvale, CA</div>
+      <div class="hero-desc">Little Shops Village is a charming outdoor art & craft market by San José Made in collaboration with Cityline Sunnyvale. 100+ makers, artists, designers, illustrators, crafters, artisans, bakers, and specialty drink makers come together in one cozy evening outdoor setting.</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec"><div class="det-sec-title">Event Info</div><div class="info-row">
+  <div class="info-card"><div class="ic-lbl">Dates</div><div class="ic-val">July 10–11, 2026</div></div>
+  <div class="info-card"><div class="ic-lbl">Hours</div><div class="ic-val">4:00 PM – 9:00 PM</div></div>
+  <div class="info-card"><div class="ic-lbl">Admission</div><div class="ic-val">Free</div></div>
+</div></div>
+      <div class="det-sec"><div class="det-sec-title">Vendor Information</div>
+<div class="vendor-box">
+  <div class="vr"><span class="vr-lbl">Spaces</span><span class="vr-val">100+ vendor spaces</span></div>
+  <div class="vr"><span class="vr-lbl">Booth Fee</span><span class="vr-val">Varies by space</span></div>
+  <div class="vr"><span class="vr-lbl">Deadline</span><span class="vr-val vr-val-accent">Applications open</span></div>
+  <div class="vr"><span class="vr-lbl">Details</span><span class="vr-val">Small-format booths ideal for independent makers. Indoor and outdoor options available.</span></div>
+</div>
+<button class="apply-btn">Apply to Vend at This Event</button></div>
+      <div class="det-sec"><div class="det-sec-title">Featured Art Types</div><div class="topics-list"><span class="det-chip">Illustration</span><span class="det-chip">Crafts & Fiber</span><span class="det-chip">Sticker Art</span><span class="det-chip">Jewelry</span><span class="det-chip">Printmaking</span></div></div>
+      <div class="det-sec"><div class="det-sec-title">Artists at This Event</div><div class="ar-grid"><div class="ar-card" data-topics="Ceramics" onclick="nav('page-artist-detail-alex-beck-ceramics')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div>
+  <div class="ar-name">Alex Beck Ceramics</div>
+  <div class="ar-med">Ceramics</div>
+  <div class="chips"><span class="chip">Ceramics</span></div>
+</div><div class="ar-card" data-topics="Illustration,Sticker Art" onclick="nav('page-artist-detail-naptime-doodler')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div>
+  <div class="ar-name">Naptime Doodler</div>
+  <div class="ar-med">Illustration · Sticker Art</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Sticker Art</span></div>
+</div><div class="ar-card" data-topics="Jewelry,Crafts & Fiber" onclick="nav('page-artist-detail-meraki-strokes')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&h=200&fit=crop&auto=format" alt="Meraki Strokes" loading="lazy"></div>
+  <div class="ar-name">Meraki Strokes</div>
+  <div class="ar-med">Jewelry · Mixed Media</div>
+  <div class="chips"><span class="chip">Jewelry</span><span class="chip">Crafts & Fiber</span></div>
+</div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Quick Info</div>
+        <div class="meta-list"><div>Cityline Sunnyvale, Sunnyvale, CA</div><div>July 10–11, 2026</div><div>4:00 PM – 9:00 PM</div><div>Free</div></div>
+      </div>
+      <div class="sb-sec"><div class="sb-label">Browse More Events</div><div class="apply-row" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="arow-name">SJMADE Summer Fair 2026</div><div class="arow-sub">August 8–9, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-illo-mart')"><div class="arow-name">ILLO Mart 2026</div><div class="arow-sub">September 26–27, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-anime-impulse')"><div class="arow-name">ANIME Impulse + K-PLAY! FEST</div><div class="arow-sub">July 18–19, 2026</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-event-detail-sjmade-summer-fair" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-events')">← Back to Events</button>
+  <div class="page-hero">
+    <div class="hero-ico"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600&h=400&fit=crop&auto=format" alt="SJMADE Summer Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">Craft Fair<span class="days-tag" data-date="2026-08-08">In ? days</span></div>
+      <div class="hero-title">SJMADE Summer Fair 2026</div>
+      <div class="hero-meta">August 8–9, 2026 · 11:00 AM – 6:00 PM</div>
+      <div class="hero-meta">San José, CA</div>
+      <div class="hero-desc">The beloved annual SJMADE Summer Fair returns! Featuring 200+ makers, artists, designers, curators, chefs, bakers, crafters and creative small businesses. One of the Bay Area's most beloved summer outdoor markets with live music and food.</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec"><div class="det-sec-title">Event Info</div><div class="info-row">
+  <div class="info-card"><div class="ic-lbl">Dates</div><div class="ic-val">August 8–9, 2026</div></div>
+  <div class="info-card"><div class="ic-lbl">Hours</div><div class="ic-val">11:00 AM – 6:00 PM</div></div>
+  <div class="info-card"><div class="ic-lbl">Admission</div><div class="ic-val">Free</div></div>
+</div></div>
+      <div class="det-sec"><div class="det-sec-title">Vendor Information</div>
+<div class="vendor-box">
+  <div class="vr"><span class="vr-lbl">Spaces</span><span class="vr-val">200+ vendor spaces</span></div>
+  <div class="vr"><span class="vr-lbl">Booth Fee</span><span class="vr-val">Varies by booth size</span></div>
+  <div class="vr"><span class="vr-lbl">Deadline</span><span class="vr-val vr-val-accent">Check website</span></div>
+  <div class="vr"><span class="vr-lbl">Details</span><span class="vr-val">Mix of indoor and outdoor spaces. Great for established vendors with diverse product lines.</span></div>
+</div>
+<button class="apply-btn">Apply to Vend at This Event</button></div>
+      <div class="det-sec"><div class="det-sec-title">Featured Art Types</div><div class="topics-list"><span class="det-chip">Illustration</span><span class="det-chip">Ceramics</span><span class="det-chip">Sticker Art</span><span class="det-chip">Jewelry</span><span class="det-chip">Crafts & Fiber</span><span class="det-chip">Printmaking</span></div></div>
+      <div class="det-sec"><div class="det-sec-title">Artists at This Event</div><div class="ar-grid"><div class="ar-card" data-topics="Illustration,Printmaking" onclick="nav('page-artist-detail-juanita-vasquez')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div>
+  <div class="ar-name">Juanita Vasquez Illustration</div>
+  <div class="ar-med">Illustration</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Printmaking</span></div>
+</div><div class="ar-card" data-topics="Ceramics" onclick="nav('page-artist-detail-alex-beck-ceramics')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div>
+  <div class="ar-name">Alex Beck Ceramics</div>
+  <div class="ar-med">Ceramics</div>
+  <div class="chips"><span class="chip">Ceramics</span></div>
+</div><div class="ar-card" data-topics="Illustration,Sticker Art" onclick="nav('page-artist-detail-naptime-doodler')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div>
+  <div class="ar-name">Naptime Doodler</div>
+  <div class="ar-med">Illustration · Sticker Art</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Sticker Art</span></div>
+</div><div class="ar-card" data-topics="Sticker Art,Illustration" onclick="nav('page-artist-detail-tokyo-shojo')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=200&h=200&fit=crop&auto=format" alt="Tokyo Shojo" loading="lazy"></div>
+  <div class="ar-name">Tokyo Shojo</div>
+  <div class="ar-med">Sticker Art · Anime Goods</div>
+  <div class="chips"><span class="chip">Sticker Art</span><span class="chip">Illustration</span></div>
+</div><div class="ar-card" data-topics="Jewelry,Crafts & Fiber" onclick="nav('page-artist-detail-meraki-strokes')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&h=200&fit=crop&auto=format" alt="Meraki Strokes" loading="lazy"></div>
+  <div class="ar-name">Meraki Strokes</div>
+  <div class="ar-med">Jewelry · Mixed Media</div>
+  <div class="chips"><span class="chip">Jewelry</span><span class="chip">Crafts & Fiber</span></div>
+</div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Quick Info</div>
+        <div class="meta-list"><div>San José, CA</div><div>August 8–9, 2026</div><div>11:00 AM – 6:00 PM</div><div>Free</div></div>
+      </div>
+      <div class="sb-sec"><div class="sb-label">Browse More Events</div><div class="apply-row" onclick="nav('page-event-detail-little-shops-july')"><div class="arow-name">Little Shops Village</div><div class="arow-sub">July 10–11, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-illo-mart')"><div class="arow-name">ILLO Mart 2026</div><div class="arow-sub">September 26–27, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-anime-impulse')"><div class="arow-name">ANIME Impulse + K-PLAY! FEST</div><div class="arow-sub">July 18–19, 2026</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-event-detail-illo-mart" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-events')">← Back to Events</button>
+  <div class="page-hero">
+    <div class="hero-ico"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&h=400&fit=crop&auto=format" alt="ILLO Mart 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">Illustration Fair<span class="days-tag" data-date="2026-09-26">In ? days</span></div>
+      <div class="hero-title">ILLO Mart 2026</div>
+      <div class="hero-meta">September 26–27, 2026 · 11:00 AM – 6:00 PM</div>
+      <div class="hero-meta">South Hall, 435 S. Market St., San José, CA</div>
+      <div class="hero-desc">ILLO MART is a celebration of all things illustration and the Bay Area illustrator community. 275 illustrators gather at South Hall alongside workshops, talks, and programming. If you draw, paint, or print — this is your event.</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec"><div class="det-sec-title">Event Info</div><div class="info-row">
+  <div class="info-card"><div class="ic-lbl">Dates</div><div class="ic-val">September 26–27, 2026</div></div>
+  <div class="info-card"><div class="ic-lbl">Hours</div><div class="ic-val">11:00 AM – 6:00 PM</div></div>
+  <div class="info-card"><div class="ic-lbl">Admission</div><div class="ic-val">Free</div></div>
+</div></div>
+      <div class="det-sec"><div class="det-sec-title">Vendor Information</div>
+<div class="vendor-box">
+  <div class="vr"><span class="vr-lbl">Spaces</span><span class="vr-val">275 illustrator spaces</span></div>
+  <div class="vr"><span class="vr-lbl">Booth Fee</span><span class="vr-val">See application</span></div>
+  <div class="vr"><span class="vr-lbl">Deadline</span><span class="vr-val vr-val-accent">June 30, 2026</span></div>
+  <div class="vr"><span class="vr-lbl">Details</span><span class="vr-val">Priority given to illustrators. Spaces sell out fast. Workshops and programming run all weekend.</span></div>
+</div>
+<button class="apply-btn">Apply to Vend at This Event</button></div>
+      <div class="det-sec"><div class="det-sec-title">Featured Art Types</div><div class="topics-list"><span class="det-chip">Illustration</span><span class="det-chip">Printmaking</span><span class="det-chip">Sticker Art</span></div></div>
+      <div class="det-sec"><div class="det-sec-title">Artists at This Event</div><div class="ar-grid"><div class="ar-card" data-topics="Illustration,Printmaking" onclick="nav('page-artist-detail-juanita-vasquez')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div>
+  <div class="ar-name">Juanita Vasquez Illustration</div>
+  <div class="ar-med">Illustration</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Printmaking</span></div>
+</div><div class="ar-card" data-topics="Illustration,Sticker Art" onclick="nav('page-artist-detail-naptime-doodler')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div>
+  <div class="ar-name">Naptime Doodler</div>
+  <div class="ar-med">Illustration · Sticker Art</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Sticker Art</span></div>
+</div><div class="ar-card" data-topics="Printmaking,Illustration" onclick="nav('page-artist-detail-panda-prints-paper')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=200&h=200&fit=crop&auto=format" alt="Panda Prints Paper" loading="lazy"></div>
+  <div class="ar-name">Panda Prints Paper</div>
+  <div class="ar-med">Printmaking · Stationery</div>
+  <div class="chips"><span class="chip">Printmaking</span><span class="chip">Illustration</span></div>
+</div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Quick Info</div>
+        <div class="meta-list"><div>South Hall, 435 S. Market St., San José, CA</div><div>September 26–27, 2026</div><div>11:00 AM – 6:00 PM</div><div>Free</div></div>
+      </div>
+      <div class="sb-sec"><div class="sb-label">Browse More Events</div><div class="apply-row" onclick="nav('page-event-detail-little-shops-july')"><div class="arow-name">Little Shops Village</div><div class="arow-sub">July 10–11, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="arow-name">SJMADE Summer Fair 2026</div><div class="arow-sub">August 8–9, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-anime-impulse')"><div class="arow-name">ANIME Impulse + K-PLAY! FEST</div><div class="arow-sub">July 18–19, 2026</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-event-detail-anime-impulse" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-events')">← Back to Events</button>
+  <div class="page-hero">
+    <div class="hero-ico"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop&auto=format" alt="ANIME Impulse + K-PLAY! FEST" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">Convention<span class="days-tag" data-date="2026-07-18">In ? days</span></div>
+      <div class="hero-title">ANIME Impulse + K-PLAY! FEST</div>
+      <div class="hero-meta">July 18–19, 2026 · 10:00 AM – 6:00 PM</div>
+      <div class="hero-meta">Santa Clara Convention Center, Santa Clara, CA</div>
+      <div class="hero-desc">A 3-in-1 convention experience: ANIME Impulse, K-PLAY! FEST, and Collectors Expo all under one roof. Features a massive Vendor Hall, Artist Alley, voice actors, cosplayers, K-pop creators, and more. One of the Bay Area's biggest pop culture events of the summer.</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec"><div class="det-sec-title">Event Info</div><div class="info-row">
+  <div class="info-card"><div class="ic-lbl">Dates</div><div class="ic-val">July 18–19, 2026</div></div>
+  <div class="info-card"><div class="ic-lbl">Hours</div><div class="ic-val">10:00 AM – 6:00 PM</div></div>
+  <div class="info-card"><div class="ic-lbl">Admission</div><div class="ic-val">Ticketed</div></div>
+</div></div>
+      <div class="det-sec"><div class="det-sec-title">Vendor Information</div>
+<div class="vendor-box">
+  <div class="vr"><span class="vr-lbl">Spaces</span><span class="vr-val">Artist Alley + vendor booths</span></div>
+  <div class="vr"><span class="vr-lbl">Booth Fee</span><span class="vr-val">Varies — see website</span></div>
+  <div class="vr"><span class="vr-lbl">Deadline</span><span class="vr-val vr-val-accent">Applications closed</span></div>
+  <div class="vr"><span class="vr-lbl">Details</span><span class="vr-val">Tickets required for entry. Artist Alley spots go fast. 3-in-1 pass for all three events.</span></div>
+</div>
+<button class="apply-btn">Apply to Vend at This Event</button></div>
+      <div class="det-sec"><div class="det-sec-title">Featured Art Types</div><div class="topics-list"><span class="det-chip">Illustration</span><span class="det-chip">Sticker Art</span><span class="det-chip">Printmaking</span></div></div>
+      <div class="det-sec"><div class="det-sec-title">Artists at This Event</div><div class="ar-grid"><div class="ar-card" data-topics="Sticker Art,Illustration" onclick="nav('page-artist-detail-tokyo-shojo')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=200&h=200&fit=crop&auto=format" alt="Tokyo Shojo" loading="lazy"></div>
+  <div class="ar-name">Tokyo Shojo</div>
+  <div class="ar-med">Sticker Art · Anime Goods</div>
+  <div class="chips"><span class="chip">Sticker Art</span><span class="chip">Illustration</span></div>
+</div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Quick Info</div>
+        <div class="meta-list"><div>Santa Clara Convention Center, Santa Clara, CA</div><div>July 18–19, 2026</div><div>10:00 AM – 6:00 PM</div><div>Ticketed</div></div>
+      </div>
+      <div class="sb-sec"><div class="sb-label">Browse More Events</div><div class="apply-row" onclick="nav('page-event-detail-little-shops-july')"><div class="arow-name">Little Shops Village</div><div class="arow-sub">July 10–11, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="arow-name">SJMADE Summer Fair 2026</div><div class="arow-sub">August 8–9, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-illo-mart')"><div class="arow-name">ILLO Mart 2026</div><div class="arow-sub">September 26–27, 2026</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-event-detail-sjmade-holiday-fair" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-events')">← Back to Events</button>
+  <div class="page-hero">
+    <div class="hero-ico"><img src="https://images.unsplash.com/photo-1511795267800-a16a814c6b2e?w=600&h=400&fit=crop&auto=format" alt="SJMADE Holiday Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">Holiday Fair<span class="days-tag" data-date="2026-11-27">In ? days</span></div>
+      <div class="hero-title">SJMADE Holiday Fair 2026</div>
+      <div class="hero-meta">November 27–28, 2026 · 11:00 AM – 6:00 PM</div>
+      <div class="hero-meta">Santa Clara Convention Center, Santa Clara, CA</div>
+      <div class="hero-desc">The largest holiday craft fair in the Bay Area. SJMADE Holiday Fair features 350+ amazing makers, artists, designers, creators, bakers, crafters and creative small businesses. Festive activities, activations, and holiday cheer all weekend.</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec"><div class="det-sec-title">Event Info</div><div class="info-row">
+  <div class="info-card"><div class="ic-lbl">Dates</div><div class="ic-val">November 27–28, 2026</div></div>
+  <div class="info-card"><div class="ic-lbl">Hours</div><div class="ic-val">11:00 AM – 6:00 PM</div></div>
+  <div class="info-card"><div class="ic-lbl">Admission</div><div class="ic-val">Free</div></div>
+</div></div>
+      <div class="det-sec"><div class="det-sec-title">Vendor Information</div>
+<div class="vendor-box">
+  <div class="vr"><span class="vr-lbl">Spaces</span><span class="vr-val">350+ vendor spaces</span></div>
+  <div class="vr"><span class="vr-lbl">Booth Fee</span><span class="vr-val">Varies by space size</span></div>
+  <div class="vr"><span class="vr-lbl">Deadline</span><span class="vr-val vr-val-accent">TBD — check website</span></div>
+  <div class="vr"><span class="vr-lbl">Details</span><span class="vr-val">This is the biggest event of the season. Apply early. Indoor venue at Santa Clara Convention Center.</span></div>
+</div>
+<button class="apply-btn">Apply to Vend at This Event</button></div>
+      <div class="det-sec"><div class="det-sec-title">Featured Art Types</div><div class="topics-list"><span class="det-chip">Illustration</span><span class="det-chip">Ceramics</span><span class="det-chip">Sticker Art</span><span class="det-chip">Jewelry</span><span class="det-chip">Crafts & Fiber</span><span class="det-chip">Printmaking</span></div></div>
+      <div class="det-sec"><div class="det-sec-title">Artists at This Event</div><div class="ar-grid"><div class="ar-card" data-topics="Illustration,Printmaking" onclick="nav('page-artist-detail-juanita-vasquez')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div>
+  <div class="ar-name">Juanita Vasquez Illustration</div>
+  <div class="ar-med">Illustration</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Printmaking</span></div>
+</div><div class="ar-card" data-topics="Ceramics" onclick="nav('page-artist-detail-alex-beck-ceramics')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div>
+  <div class="ar-name">Alex Beck Ceramics</div>
+  <div class="ar-med">Ceramics</div>
+  <div class="chips"><span class="chip">Ceramics</span></div>
+</div><div class="ar-card" data-topics="Printmaking,Illustration" onclick="nav('page-artist-detail-panda-prints-paper')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=200&h=200&fit=crop&auto=format" alt="Panda Prints Paper" loading="lazy"></div>
+  <div class="ar-name">Panda Prints Paper</div>
+  <div class="ar-med">Printmaking · Stationery</div>
+  <div class="chips"><span class="chip">Printmaking</span><span class="chip">Illustration</span></div>
+</div><div class="ar-card" data-topics="Jewelry,Crafts & Fiber" onclick="nav('page-artist-detail-meraki-strokes')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&h=200&fit=crop&auto=format" alt="Meraki Strokes" loading="lazy"></div>
+  <div class="ar-name">Meraki Strokes</div>
+  <div class="ar-med">Jewelry · Mixed Media</div>
+  <div class="chips"><span class="chip">Jewelry</span><span class="chip">Crafts & Fiber</span></div>
+</div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Quick Info</div>
+        <div class="meta-list"><div>Santa Clara Convention Center, Santa Clara, CA</div><div>November 27–28, 2026</div><div>11:00 AM – 6:00 PM</div><div>Free</div></div>
+      </div>
+      <div class="sb-sec"><div class="sb-label">Browse More Events</div><div class="apply-row" onclick="nav('page-event-detail-little-shops-july')"><div class="arow-name">Little Shops Village</div><div class="arow-sub">July 10–11, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="arow-name">SJMADE Summer Fair 2026</div><div class="arow-sub">August 8–9, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-illo-mart')"><div class="arow-name">ILLO Mart 2026</div><div class="arow-sub">September 26–27, 2026</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-event-detail-fan-expo-sf" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-events')">← Back to Events</button>
+  <div class="page-hero">
+    <div class="hero-ico"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=600&h=400&fit=crop&auto=format" alt="FAN EXPO San Francisco — Artist Alley" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">Convention<span class="days-tag" data-date="2026-11-27">In ? days</span></div>
+      <div class="hero-title">FAN EXPO San Francisco — Artist Alley</div>
+      <div class="hero-meta">November 27–29, 2026 · 10:00 AM – 6:00 PM</div>
+      <div class="hero-meta">Moscone Center West, 800 Howard St., San Francisco, CA</div>
+      <div class="hero-desc">FAN EXPO San Francisco brings together anime, comics, cosplay, gaming, and sci-fi fans at Moscone Center West. The Artist Alley is open to amateur and professional creators who make one-of-a-kind artwork, sculptures, jewelry, pins and buttons.</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec"><div class="det-sec-title">Event Info</div><div class="info-row">
+  <div class="info-card"><div class="ic-lbl">Dates</div><div class="ic-val">November 27–29, 2026</div></div>
+  <div class="info-card"><div class="ic-lbl">Hours</div><div class="ic-val">10:00 AM – 6:00 PM</div></div>
+  <div class="info-card"><div class="ic-lbl">Admission</div><div class="ic-val">Ticketed</div></div>
+</div></div>
+      <div class="det-sec"><div class="det-sec-title">Vendor Information</div>
+<div class="vendor-box">
+  <div class="vr"><span class="vr-lbl">Spaces</span><span class="vr-val">Standard ($390) or Premium ($900)</span></div>
+  <div class="vr"><span class="vr-lbl">Booth Fee</span><span class="vr-val">$390–$900</span></div>
+  <div class="vr"><span class="vr-lbl">Deadline</span><span class="vr-val vr-val-accent">Waitlist open</span></div>
+  <div class="vr"><span class="vr-lbl">Details</span><span class="vr-val">Standard = 6'×5' space, 1 table, 2 chairs, 2 passes. Premium = 5'×12' end cap, 2 tables.</span></div>
+</div>
+<button class="apply-btn">Apply to Vend at This Event</button></div>
+      <div class="det-sec"><div class="det-sec-title">Featured Art Types</div><div class="topics-list"><span class="det-chip">Illustration</span><span class="det-chip">Sticker Art</span><span class="det-chip">Printmaking</span><span class="det-chip">Crafts & Fiber</span></div></div>
+      <div class="det-sec"><div class="det-sec-title">Artists at This Event</div><div class="ar-grid"><div class="ar-card" data-topics="Sticker Art,Illustration" onclick="nav('page-artist-detail-tokyo-shojo')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=200&h=200&fit=crop&auto=format" alt="Tokyo Shojo" loading="lazy"></div>
+  <div class="ar-name">Tokyo Shojo</div>
+  <div class="ar-med">Sticker Art · Anime Goods</div>
+  <div class="chips"><span class="chip">Sticker Art</span><span class="chip">Illustration</span></div>
+</div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Quick Info</div>
+        <div class="meta-list"><div>Moscone Center West, 800 Howard St., San Francisco, CA</div><div>November 27–29, 2026</div><div>10:00 AM – 6:00 PM</div><div>Ticketed</div></div>
+      </div>
+      <div class="sb-sec"><div class="sb-label">Browse More Events</div><div class="apply-row" onclick="nav('page-event-detail-little-shops-july')"><div class="arow-name">Little Shops Village</div><div class="arow-sub">July 10–11, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="arow-name">SJMADE Summer Fair 2026</div><div class="arow-sub">August 8–9, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-illo-mart')"><div class="arow-name">ILLO Mart 2026</div><div class="arow-sub">September 26–27, 2026</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-event-detail-sjmade-fest-2026" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-events')">← Back to Events</button>
+  <div class="page-hero">
+    <div class="hero-ico"><img src="https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=600&h=400&fit=crop&auto=format" alt="SJMADE Fest 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">Craft Fair<span class="days-tag days-tag-past">This event has passed</span></div>
+      <div class="hero-title">SJMADE Fest 2026</div>
+      <div class="hero-meta">May 30–31, 2026</div>
+      <div class="hero-meta">History Park San José, San José, CA</div>
+      <div class="hero-desc">San José Made's largest outdoor event returned at History Park with 250+ makers. Highlights: Kitten Lounge by Mini Cat Town, K-Pop dance performances by K-Pop-Up, and food curated by Moveable Feast.</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec"><div class="det-sec-title">About This Event</div><p class="body-text">San José Made's largest outdoor event returned at History Park with 250+ makers. Highlights: Kitten Lounge by Mini Cat Town, K-Pop dance performances by K-Pop-Up, and food curated by Moveable Feast.</p></div>
+      
+      <div class="det-sec"><div class="det-sec-title">Featured Art Types</div><div class="topics-list"><span class="det-chip">Illustration</span><span class="det-chip">Ceramics</span><span class="det-chip">Sticker Art</span><span class="det-chip">Jewelry</span><span class="det-chip">Crafts & Fiber</span><span class="det-chip">Printmaking</span></div></div>
+      
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Quick Info</div>
+        <div class="meta-list"><div>History Park San José, San José, CA</div><div>May 30–31, 2026</div></div>
+      </div>
+      <div class="sb-sec"><div class="sb-label">Browse More Events</div><div class="apply-row" onclick="nav('page-event-detail-little-shops-july')"><div class="arow-name">Little Shops Village</div><div class="arow-sub">July 10–11, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="arow-name">SJMADE Summer Fair 2026</div><div class="arow-sub">August 8–9, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-illo-mart')"><div class="arow-name">ILLO Mart 2026</div><div class="arow-sub">September 26–27, 2026</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-event-detail-sf-art-fair-2026" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-events')">← Back to Events</button>
+  <div class="page-hero">
+    <div class="hero-ico"><img src="https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=600&h=400&fit=crop&auto=format" alt="San Francisco Art Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">Art Fair<span class="days-tag days-tag-past">This event has passed</span></div>
+      <div class="hero-title">San Francisco Art Fair 2026</div>
+      <div class="hero-meta">April 16–19, 2026</div>
+      <div class="hero-meta">Fort Mason Festival Pavilion, San Francisco, CA</div>
+      <div class="hero-desc">85 leading galleries from around the world presented modern and contemporary art. The fair's 14th edition featured public programming and new gallery highlights across the Bay Area and beyond.</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec"><div class="det-sec-title">About This Event</div><p class="body-text">85 leading galleries from around the world presented modern and contemporary art. The fair's 14th edition featured public programming and new gallery highlights across the Bay Area and beyond.</p></div>
+      
+      <div class="det-sec"><div class="det-sec-title">Featured Art Types</div><div class="topics-list"><span class="det-chip">Illustration</span><span class="det-chip">Printmaking</span></div></div>
+      
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Quick Info</div>
+        <div class="meta-list"><div>Fort Mason Festival Pavilion, San Francisco, CA</div><div>April 16–19, 2026</div></div>
+      </div>
+      <div class="sb-sec"><div class="sb-label">Browse More Events</div><div class="apply-row" onclick="nav('page-event-detail-little-shops-july')"><div class="arow-name">Little Shops Village</div><div class="arow-sub">July 10–11, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="arow-name">SJMADE Summer Fair 2026</div><div class="arow-sub">August 8–9, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-illo-mart')"><div class="arow-name">ILLO Mart 2026</div><div class="arow-sub">September 26–27, 2026</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-event-detail-night-market-june" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-events')">← Back to Events</button>
+  <div class="page-hero">
+    <div class="hero-ico"><img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&h=400&fit=crop&auto=format" alt="Celebrate Santa Clara Night Market (June)" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"></div>
+    <div class="hero-cnt">
+      <div class="hero-tag">Night Market<span class="days-tag days-tag-past">This event has passed</span></div>
+      <div class="hero-title">Celebrate Santa Clara Night Market (June)</div>
+      <div class="hero-meta">June 5–6, 2026</div>
+      <div class="hero-meta">Santa Clara, CA</div>
+      <div class="hero-desc">The summer kick-off edition of the Santa Clara Night Market brought together local makers, food vendors, and artisans for an evening outdoor community celebration.</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec"><div class="det-sec-title">About This Event</div><p class="body-text">The summer kick-off edition of the Santa Clara Night Market brought together local makers, food vendors, and artisans for an evening outdoor community celebration.</p></div>
+      
+      <div class="det-sec"><div class="det-sec-title">Featured Art Types</div><div class="topics-list"><span class="det-chip">Crafts & Fiber</span><span class="det-chip">Jewelry</span><span class="det-chip">Sticker Art</span></div></div>
+      
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Quick Info</div>
+        <div class="meta-list"><div>Santa Clara, CA</div><div>June 5–6, 2026</div></div>
+      </div>
+      <div class="sb-sec"><div class="sb-label">Browse More Events</div><div class="apply-row" onclick="nav('page-event-detail-little-shops-july')"><div class="arow-name">Little Shops Village</div><div class="arow-sub">July 10–11, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="arow-name">SJMADE Summer Fair 2026</div><div class="arow-sub">August 8–9, 2026</div></div><div class="apply-row" onclick="nav('page-event-detail-illo-mart')"><div class="arow-name">ILLO Mart 2026</div><div class="arow-sub">September 26–27, 2026</div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ ARTISTS LIST ══ -->
+<div id="page-artists" class="page">
+  <div class="inner-wrap">
+    <div class="pg-header"><div class="pg-title">Artist Directory</div><div class="pg-sub">Independent artists, makers &amp; creative vendors of the Bay Area</div></div>
+    <div class="filter-bar"><span class="fl">Filter:</span><button class="fpill  act" onclick="filterPage('page-artists',null)">All</button><button class="fpill" onclick="filterPage('page-artists','Illustration')">Illustration</button><button class="fpill" onclick="filterPage('page-artists','Sticker Art')">Sticker Art</button><button class="fpill" onclick="filterPage('page-artists','Ceramics')">Ceramics</button><button class="fpill" onclick="filterPage('page-artists','Jewelry')">Jewelry</button><button class="fpill" onclick="filterPage('page-artists','Printmaking')">Printmaking</button><button class="fpill" onclick="filterPage('page-artists','Crafts & Fiber')">Crafts & Fiber</button></div>
+    <div class="ar-grid" id="page-artists-grid"><div class="ar-card" data-topics="Illustration,Printmaking" onclick="nav('page-artist-detail-juanita-vasquez')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div>
+  <div class="ar-name">Juanita Vasquez Illustration</div>
+  <div class="ar-med">Illustration</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Printmaking</span></div>
+</div>
+<div class="ar-card" data-topics="Ceramics" onclick="nav('page-artist-detail-alex-beck-ceramics')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div>
+  <div class="ar-name">Alex Beck Ceramics</div>
+  <div class="ar-med">Ceramics</div>
+  <div class="chips"><span class="chip">Ceramics</span></div>
+</div>
+<div class="ar-card" data-topics="Illustration,Sticker Art" onclick="nav('page-artist-detail-naptime-doodler')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div>
+  <div class="ar-name">Naptime Doodler</div>
+  <div class="ar-med">Illustration · Sticker Art</div>
+  <div class="chips"><span class="chip">Illustration</span><span class="chip">Sticker Art</span></div>
+</div>
+<div class="ar-card" data-topics="Sticker Art,Illustration" onclick="nav('page-artist-detail-tokyo-shojo')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=200&h=200&fit=crop&auto=format" alt="Tokyo Shojo" loading="lazy"></div>
+  <div class="ar-name">Tokyo Shojo</div>
+  <div class="ar-med">Sticker Art · Anime Goods</div>
+  <div class="chips"><span class="chip">Sticker Art</span><span class="chip">Illustration</span></div>
+</div>
+<div class="ar-card" data-topics="Printmaking,Illustration" onclick="nav('page-artist-detail-panda-prints-paper')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=200&h=200&fit=crop&auto=format" alt="Panda Prints Paper" loading="lazy"></div>
+  <div class="ar-name">Panda Prints Paper</div>
+  <div class="ar-med">Printmaking · Stationery</div>
+  <div class="chips"><span class="chip">Printmaking</span><span class="chip">Illustration</span></div>
+</div>
+<div class="ar-card" data-topics="Jewelry,Crafts & Fiber" onclick="nav('page-artist-detail-meraki-strokes')">
+  <div class="ar-av"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&h=200&fit=crop&auto=format" alt="Meraki Strokes" loading="lazy"></div>
+  <div class="ar-name">Meraki Strokes</div>
+  <div class="ar-med">Jewelry · Mixed Media</div>
+  <div class="chips"><span class="chip">Jewelry</span><span class="chip">Crafts & Fiber</span></div>
+</div></div>
+  </div>
+</div>
+
+<!-- ══ ARTIST DETAIL PAGES ══ -->
+<div id="page-artist-detail-juanita-vasquez" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-artists')">← Back to Artists</button>
+  <div class="ar-detail-hd">
+    <div class="adh-av"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div>
+    <div>
+      <div class="adh-name">Juanita Vasquez Illustration</div>
+      <div class="adh-med">Illustration</div>
+      <div class="adh-loc">San José, CA</div>
+      <div class="adh-topics"><span class="det-chip">Illustration</span><span class="det-chip">Printmaking</span></div>
+      <div class="social-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="3"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>@juanitavasquezart</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec">
+        <div class="det-sec-title">About Juanita</div>
+        <p class="body-text">Juanita Vasquez is a Bay Area illustrator whose vibrant work draws from her Latinx heritage and love of bold color. Her prints and illustrations feature botanicals, community scenes, and cultural celebration rendered in a lush, expressive style.</p>
+        <div class="spotlight-box"><div class="spotlight-label">Artist Spotlight</div><p class="spotlight-text">A regular at SJMade events, Juanita has spent 5+ years building a devoted following with her richly colored art prints. Her booth is always one of the first to sell out at ILLO Mart.</p></div>
+      </div>
+      <div class="det-sec"><div class="det-sec-title">Events</div><div class="ev-att-grid"><div class="ev-att" onclick="nav('page-event-detail-illo-mart')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=200&h=200&fit=crop&auto=format" alt="ILLO Mart 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">ILLO Mart 2026</div><div class="ev-att-date">September 26–27, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=200&h=200&fit=crop&auto=format" alt="SJMADE Summer Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">SJMADE Summer Fair 2026</div><div class="ev-att-date">August 8–9, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-sjmade-holiday-fair')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1511795267800-a16a814c6b2e?w=200&h=200&fit=crop&auto=format" alt="SJMADE Holiday Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">SJMADE Holiday Fair 2026</div><div class="ev-att-date">November 27–28, 2026</div></div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Artist Info</div><div class="meta-list"><div>San José, CA</div><div>Illustration</div><div>@juanitavasquezart</div></div></div>
+      <div class="sb-sec"><div class="sb-label">Art Types</div><div class="topic-col"><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Illustration')">Illustration</button><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Printmaking')">Printmaking</button></div></div>
+      <div class="sb-sec"><div class="sb-label">Discover More Artists</div><div class="sp-row" onclick="nav('page-artist-detail-alex-beck-ceramics')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div><div><div class="sp-name">Alex Beck Ceramics</div><div class="sp-sub">Ceramics</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-naptime-doodler')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div><div><div class="sp-name">Naptime Doodler</div><div class="sp-sub">Illustration · Sticker Art</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-tokyo-shojo')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=200&h=200&fit=crop&auto=format" alt="Tokyo Shojo" loading="lazy"></div><div><div class="sp-name">Tokyo Shojo</div><div class="sp-sub">Sticker Art · Anime Goods</div></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-artist-detail-alex-beck-ceramics" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-artists')">← Back to Artists</button>
+  <div class="ar-detail-hd">
+    <div class="adh-av"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div>
+    <div>
+      <div class="adh-name">Alex Beck Ceramics</div>
+      <div class="adh-med">Ceramics</div>
+      <div class="adh-loc">Oakland, CA</div>
+      <div class="adh-topics"><span class="det-chip">Ceramics</span></div>
+      <div class="social-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="3"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>@alexbeckceramics</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec">
+        <div class="det-sec-title">About Alex</div>
+        <p class="body-text">Alex Beck creates functional and sculptural ceramics inspired by Pacific Coast textures and tones. Each piece is hand-thrown on the wheel and finished with custom glazes developed in their Oakland studio.</p>
+        <div class="spotlight-box"><div class="spotlight-label">Artist Spotlight</div><p class="spotlight-text">Alex's ceramics stand out for their earthy palettes and thoughtful forms. A crowd-favorite at Bay Area markets, Alex brings a grounding, tactile energy to every event.</p></div>
+      </div>
+      <div class="det-sec"><div class="det-sec-title">Events</div><div class="ev-att-grid"><div class="ev-att" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=200&h=200&fit=crop&auto=format" alt="SJMADE Summer Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">SJMADE Summer Fair 2026</div><div class="ev-att-date">August 8–9, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-sjmade-holiday-fair')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1511795267800-a16a814c6b2e?w=200&h=200&fit=crop&auto=format" alt="SJMADE Holiday Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">SJMADE Holiday Fair 2026</div><div class="ev-att-date">November 27–28, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-little-shops-july')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=200&h=200&fit=crop&auto=format" alt="Little Shops Village" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">Little Shops Village</div><div class="ev-att-date">July 10–11, 2026</div></div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Artist Info</div><div class="meta-list"><div>Oakland, CA</div><div>Ceramics</div><div>@alexbeckceramics</div></div></div>
+      <div class="sb-sec"><div class="sb-label">Art Types</div><div class="topic-col"><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Ceramics')">Ceramics</button></div></div>
+      <div class="sb-sec"><div class="sb-label">Discover More Artists</div><div class="sp-row" onclick="nav('page-artist-detail-juanita-vasquez')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div><div><div class="sp-name">Juanita Vasquez Illustration</div><div class="sp-sub">Illustration</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-naptime-doodler')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div><div><div class="sp-name">Naptime Doodler</div><div class="sp-sub">Illustration · Sticker Art</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-tokyo-shojo')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=200&h=200&fit=crop&auto=format" alt="Tokyo Shojo" loading="lazy"></div><div><div class="sp-name">Tokyo Shojo</div><div class="sp-sub">Sticker Art · Anime Goods</div></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-artist-detail-naptime-doodler" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-artists')">← Back to Artists</button>
+  <div class="ar-detail-hd">
+    <div class="adh-av"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div>
+    <div>
+      <div class="adh-name">Naptime Doodler</div>
+      <div class="adh-med">Illustration · Sticker Art</div>
+      <div class="adh-loc">San José, CA</div>
+      <div class="adh-topics"><span class="det-chip">Illustration</span><span class="det-chip">Sticker Art</span></div>
+      <div class="social-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="3"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>@naptimedoodler</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec">
+        <div class="det-sec-title">About Naptime</div>
+        <p class="body-text">Naptime Doodler creates cozy, whimsical characters rendered in soft, dreamlike palettes. Sleepy animals, moon motifs, and quiet moments define their work, which appears as stickers, prints, and small goods.</p>
+        <div class="spotlight-box"><div class="spotlight-label">Artist Spotlight</div><p class="spotlight-text">One of the most recognizable booths at SJMade events, Naptime Doodler's charming characters have earned a devoted following. Their limited sticker packs sell out within the first hour of every market.</p></div>
+      </div>
+      <div class="det-sec"><div class="det-sec-title">Events</div><div class="ev-att-grid"><div class="ev-att" onclick="nav('page-event-detail-little-shops-july')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=200&h=200&fit=crop&auto=format" alt="Little Shops Village" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">Little Shops Village</div><div class="ev-att-date">July 10–11, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=200&h=200&fit=crop&auto=format" alt="SJMADE Summer Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">SJMADE Summer Fair 2026</div><div class="ev-att-date">August 8–9, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-illo-mart')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=200&h=200&fit=crop&auto=format" alt="ILLO Mart 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">ILLO Mart 2026</div><div class="ev-att-date">September 26–27, 2026</div></div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Artist Info</div><div class="meta-list"><div>San José, CA</div><div>Illustration · Sticker Art</div><div>@naptimedoodler</div></div></div>
+      <div class="sb-sec"><div class="sb-label">Art Types</div><div class="topic-col"><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Illustration')">Illustration</button><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Sticker Art')">Sticker Art</button></div></div>
+      <div class="sb-sec"><div class="sb-label">Discover More Artists</div><div class="sp-row" onclick="nav('page-artist-detail-juanita-vasquez')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div><div><div class="sp-name">Juanita Vasquez Illustration</div><div class="sp-sub">Illustration</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-alex-beck-ceramics')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div><div><div class="sp-name">Alex Beck Ceramics</div><div class="sp-sub">Ceramics</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-tokyo-shojo')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=200&h=200&fit=crop&auto=format" alt="Tokyo Shojo" loading="lazy"></div><div><div class="sp-name">Tokyo Shojo</div><div class="sp-sub">Sticker Art · Anime Goods</div></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-artist-detail-tokyo-shojo" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-artists')">← Back to Artists</button>
+  <div class="ar-detail-hd">
+    <div class="adh-av"><img src="https://images.unsplash.com/photo-1560169897-fc0cdbdfa4d5?w=200&h=200&fit=crop&auto=format" alt="Tokyo Shojo" loading="lazy"></div>
+    <div>
+      <div class="adh-name">Tokyo Shojo</div>
+      <div class="adh-med">Sticker Art · Anime Goods</div>
+      <div class="adh-loc">San Francisco, CA</div>
+      <div class="adh-topics"><span class="det-chip">Sticker Art</span><span class="det-chip">Illustration</span></div>
+      <div class="social-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="3"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>@tokyoshojo</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec">
+        <div class="det-sec-title">About Tokyo</div>
+        <p class="body-text">Tokyo Shojo creates anime-inspired art and accessories celebrating kawaii culture and Japanese pop aesthetics. From holographic stickers to enamel pins and art prints, their work captures the playful spirit of fan art culture.</p>
+        <div class="spotlight-box"><div class="spotlight-label">Artist Spotlight</div><p class="spotlight-text">With a sharp anime art style and deep knowledge of the convention scene, Tokyo Shojo is a beloved vendor at both art markets and fan conventions. Their table draws lines at every event.</p></div>
+      </div>
+      <div class="det-sec"><div class="det-sec-title">Events</div><div class="ev-att-grid"><div class="ev-att" onclick="nav('page-event-detail-fan-expo-sf')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=200&h=200&fit=crop&auto=format" alt="FAN EXPO San Francisco — Artist Alley" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">FAN EXPO San Francisco — Artist Alley</div><div class="ev-att-date">November 27–29, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=200&h=200&fit=crop&auto=format" alt="SJMADE Summer Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">SJMADE Summer Fair 2026</div><div class="ev-att-date">August 8–9, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-anime-impulse')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=200&h=200&fit=crop&auto=format" alt="ANIME Impulse + K-PLAY! FEST" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">ANIME Impulse + K-PLAY! FEST</div><div class="ev-att-date">July 18–19, 2026</div></div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Artist Info</div><div class="meta-list"><div>San Francisco, CA</div><div>Sticker Art · Anime Goods</div><div>@tokyoshojo</div></div></div>
+      <div class="sb-sec"><div class="sb-label">Art Types</div><div class="topic-col"><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Sticker Art')">Sticker Art</button><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Illustration')">Illustration</button></div></div>
+      <div class="sb-sec"><div class="sb-label">Discover More Artists</div><div class="sp-row" onclick="nav('page-artist-detail-juanita-vasquez')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div><div><div class="sp-name">Juanita Vasquez Illustration</div><div class="sp-sub">Illustration</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-alex-beck-ceramics')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div><div><div class="sp-name">Alex Beck Ceramics</div><div class="sp-sub">Ceramics</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-naptime-doodler')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div><div><div class="sp-name">Naptime Doodler</div><div class="sp-sub">Illustration · Sticker Art</div></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-artist-detail-panda-prints-paper" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-artists')">← Back to Artists</button>
+  <div class="ar-detail-hd">
+    <div class="adh-av"><img src="https://images.unsplash.com/photo-1481277542470-605612bd2d61?w=200&h=200&fit=crop&auto=format" alt="Panda Prints Paper" loading="lazy"></div>
+    <div>
+      <div class="adh-name">Panda Prints Paper</div>
+      <div class="adh-med">Printmaking · Stationery</div>
+      <div class="adh-loc">Berkeley, CA</div>
+      <div class="adh-topics"><span class="det-chip">Printmaking</span><span class="det-chip">Illustration</span></div>
+      <div class="social-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="3"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>@pandaprintspaper</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec">
+        <div class="det-sec-title">About Panda</div>
+        <p class="body-text">Panda Prints Paper specializes in letterpress and risograph printing, producing stationery, cards, and limited-edition art prints with a distinctly tactile, handcrafted quality. Each run is small-batch and intentional.</p>
+        <div class="spotlight-box"><div class="spotlight-label">Artist Spotlight</div><p class="spotlight-text">Rooted in the tradition of printmaking, Panda Prints Paper brings a rare craft to Bay Area art markets. Their limited risograph runs sell out within hours — sometimes before the event opens.</p></div>
+      </div>
+      <div class="det-sec"><div class="det-sec-title">Events</div><div class="ev-att-grid"><div class="ev-att" onclick="nav('page-event-detail-illo-mart')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=200&h=200&fit=crop&auto=format" alt="ILLO Mart 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">ILLO Mart 2026</div><div class="ev-att-date">September 26–27, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-sjmade-holiday-fair')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1511795267800-a16a814c6b2e?w=200&h=200&fit=crop&auto=format" alt="SJMADE Holiday Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">SJMADE Holiday Fair 2026</div><div class="ev-att-date">November 27–28, 2026</div></div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Artist Info</div><div class="meta-list"><div>Berkeley, CA</div><div>Printmaking · Stationery</div><div>@pandaprintspaper</div></div></div>
+      <div class="sb-sec"><div class="sb-label">Art Types</div><div class="topic-col"><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Printmaking')">Printmaking</button><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Illustration')">Illustration</button></div></div>
+      <div class="sb-sec"><div class="sb-label">Discover More Artists</div><div class="sp-row" onclick="nav('page-artist-detail-juanita-vasquez')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div><div><div class="sp-name">Juanita Vasquez Illustration</div><div class="sp-sub">Illustration</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-alex-beck-ceramics')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div><div><div class="sp-name">Alex Beck Ceramics</div><div class="sp-sub">Ceramics</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-naptime-doodler')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div><div><div class="sp-name">Naptime Doodler</div><div class="sp-sub">Illustration · Sticker Art</div></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+<div id="page-artist-detail-meraki-strokes" class="page">
+<div class="inner-wrap">
+  <button class="back-btn" onclick="nav('page-artists')">← Back to Artists</button>
+  <div class="ar-detail-hd">
+    <div class="adh-av"><img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=200&h=200&fit=crop&auto=format" alt="Meraki Strokes" loading="lazy"></div>
+    <div>
+      <div class="adh-name">Meraki Strokes</div>
+      <div class="adh-med">Jewelry · Mixed Media</div>
+      <div class="adh-loc">San José, CA</div>
+      <div class="adh-topics"><span class="det-chip">Jewelry</span><span class="det-chip">Crafts & Fiber</span></div>
+      <div class="social-tag"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="3"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>@merakistrokes</div>
+    </div>
+  </div>
+  <div class="detail-body">
+    <div class="det-main">
+      <div class="det-sec">
+        <div class="det-sec-title">About Meraki</div>
+        <p class="body-text">Meraki Strokes handcrafts jewelry and mixed media accessories inspired by nature and cultural heritage. Natural stones, hand-wrapped wire, and meaningful symbols come together in pieces designed to be worn and treasured.</p>
+        <div class="spotlight-box"><div class="spotlight-label">Artist Spotlight</div><p class="spotlight-text">Meraki Strokes brings soulful energy to every market table. Their jewelry pieces carry a story — each one is one-of-a-kind, reflecting a deep commitment to craft and community.</p></div>
+      </div>
+      <div class="det-sec"><div class="det-sec-title">Events</div><div class="ev-att-grid"><div class="ev-att" onclick="nav('page-event-detail-sjmade-summer-fair')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=200&h=200&fit=crop&auto=format" alt="SJMADE Summer Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">SJMADE Summer Fair 2026</div><div class="ev-att-date">August 8–9, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-little-shops-july')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=200&h=200&fit=crop&auto=format" alt="Little Shops Village" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">Little Shops Village</div><div class="ev-att-date">July 10–11, 2026</div></div><div class="ev-att" onclick="nav('page-event-detail-sjmade-holiday-fair')"><div class="ev-att-ico"><img src="https://images.unsplash.com/photo-1511795267800-a16a814c6b2e?w=200&h=200&fit=crop&auto=format" alt="SJMADE Holiday Fair 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;"></div><div class="ev-att-name">SJMADE Holiday Fair 2026</div><div class="ev-att-date">November 27–28, 2026</div></div></div></div>
+    </div>
+    <div class="det-side">
+      <div class="sb-sec"><div class="sb-label">Artist Info</div><div class="meta-list"><div>San José, CA</div><div>Jewelry · Mixed Media</div><div>@merakistrokes</div></div></div>
+      <div class="sb-sec"><div class="sb-label">Art Types</div><div class="topic-col"><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Jewelry')">Jewelry</button><button class="tpill tpill-left" onclick="nav('page-artists');filterPage('page-artists','Crafts & Fiber')">Crafts & Fiber</button></div></div>
+      <div class="sb-sec"><div class="sb-label">Discover More Artists</div><div class="sp-row" onclick="nav('page-artist-detail-juanita-vasquez')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1561214115-f2f134cc4912?w=200&h=200&fit=crop&auto=format" alt="Juanita Vasquez Illustration" loading="lazy"></div><div><div class="sp-name">Juanita Vasquez Illustration</div><div class="sp-sub">Illustration</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-alex-beck-ceramics')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=200&h=200&fit=crop&auto=format" alt="Alex Beck Ceramics" loading="lazy"></div><div><div class="sp-name">Alex Beck Ceramics</div><div class="sp-sub">Ceramics</div></div></div><div class="sp-row" onclick="nav('page-artist-detail-naptime-doodler')"><div class="sp-ico"><img src="https://images.unsplash.com/photo-1578301978693-85fa9c0320b9?w=200&h=200&fit=crop&auto=format" alt="Naptime Doodler" loading="lazy"></div><div><div class="sp-name">Naptime Doodler</div><div class="sp-sub">Illustration · Sticker Art</div></div></div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ COMMUNITY ══ -->
+<div id="page-community" class="page">
+  <div class="inner-wrap">
+    <div class="pg-header"><div class="pg-title">Community</div><div class="pg-sub">Announcements, vendor resources, and ways to get involved</div></div>
+    <div class="det-sec"><div class="det-sec-title">Announcements</div><div class="ann-card">
+  <div class="ann-ico"><img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=300&h=300&fit=crop&auto=format" alt="Apply to ILLO Mart 2026 — Deadline June 30!" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
+  <div><div class="ann-tag">Vendor Applications Open</div><div class="ann-title">Apply to ILLO Mart 2026 — Deadline June 30!</div><div class="ann-desc">A celebration of illustration & the creative community. 275 illustrators, workshops, and talks at South Hall, Downtown San José. Free admission for attendees.</div>
+  <button class="ann-cta" onclick="nav('page-event-detail-illo-mart')">View Event →</button></div>
+</div><div class="ann-card">
+  <div class="ann-ico"><img src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=300&h=300&fit=crop&auto=format" alt="SJMADE Summer Fair Returns — August 8–9" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
+  <div><div class="ann-tag">Save the Date</div><div class="ann-title">SJMADE Summer Fair Returns — August 8–9</div><div class="ann-desc">200+ makers, artists, designers, chefs, and bakers at one of the Bay Area's most beloved summer outdoor markets. Free admission. Perfect for discovering new artists and small businesses.</div>
+  <button class="ann-cta" onclick="nav('page-event-detail-sjmade-summer-fair')">View Event →</button></div>
+</div><div class="ann-card">
+  <div class="ann-ico"><img src="https://images.unsplash.com/photo-1612036782180-6f0b6cd846fe?w=300&h=300&fit=crop&auto=format" alt="FAN EXPO SF Artist Alley — Apply Now" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
+  <div><div class="ann-tag">Artist Alley Now Open</div><div class="ann-title">FAN EXPO SF Artist Alley — Apply Now</div><div class="ann-desc">Share one-of-a-kind artwork, sculptures, jewelry, pins and buttons at Moscone Center West. Standard spaces from $390. Join the waitlist today.</div>
+  <button class="ann-cta" onclick="nav('page-event-detail-fan-expo-sf')">View Event →</button></div>
+</div><div class="ann-card">
+  <div class="ann-ico"><img src="https://images.unsplash.com/photo-1511795267800-a16a814c6b2e?w=300&h=300&fit=crop&auto=format" alt="SJMADE Holiday Fair — Nov 27–28, 2026" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:8px;"></div>
+  <div><div class="ann-tag">Largest Holiday Fair in the Bay Area</div><div class="ann-title">SJMADE Holiday Fair — Nov 27–28, 2026</div><div class="ann-desc">350+ makers, artists, designers, creators, bakers, crafters and creative small businesses. Fun festive activities and activation stations. Santa Clara Convention Center.</div>
+  <button class="ann-cta" onclick="nav('page-event-detail-sjmade-holiday-fair')">View Event →</button></div>
+</div></div>
+    <div class="det-sec">
+      <div class="det-sec-title">Vendor Resources</div>
+      <div class="res-grid">
+        <div class="res-card"><div class="res-title">Beginner Vendor Tips</div><ul class="res-items"><li>Start small — pick 1–2 events to test your setup</li><li>Research the event audience before applying</li><li>Bring more product than you think you'll need</li><li>Talk to other vendors at your first event</li></ul></div>
+        <div class="res-card"><div class="res-title">Pricing Advice</div><ul class="res-items"><li>Factor in materials, time, and booth fees</li><li>Research comparable products at similar events</li><li>Offer a range: entry-level and premium pieces</li><li>Bring exact change and a card reader</li></ul></div>
+        <div class="res-card"><div class="res-title">Booth Setup Guides</div><ul class="res-items"><li>Use height variation to create visual interest</li><li>Put your most eye-catching work at eye level</li><li>Have your business cards / IG handle visible</li><li>Practice setting up at home before the event</li></ul></div>
+        <div class="res-card"><div class="res-title">Event Preparation</div><ul class="res-items"><li>Confirm your setup time and load-in details</li><li>Pack a vendor kit: tape, zip ties, scissors, markers</li><li>Download your event's floor plan in advance</li><li>Eat before — there's rarely time during the event</li></ul></div>
+      </div>
+    </div>
+    <div class="det-sec">
+      <div class="det-sec-title">Get Involved</div>
+      <div class="involve-form">
+        <div class="involve-row"><input type="text" class="involve-input" placeholder="Your name"><input type="email" class="involve-input" placeholder="Email address"></div>
+        <input type="text" class="involve-input" placeholder="Subject (e.g. Submit an Event, Artist Profile, Partnership)">
+        <textarea class="involve-input involve-ta" placeholder="Your message…" rows="5"></textarea>
+        <button class="involve-btn">Send Message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-nav">
+    <button onclick="nav('page-home')">Home</button>
+    <button onclick="nav('page-events')">Events</button>
+    <button onclick="nav('page-artists')">Artists</button>
+    <button onclick="nav('page-community')">Vendor Resources</button>
+  </div>
+  SF Bay Area: Art Collective &copy; 2026 · A centralized hub for Bay Area artists &amp; makers
+</footer>
+
+<script>
+let carIdx = 0;
+
+function nav(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const page = document.getElementById(pageId);
+  if (page) page.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  ['events','artists'].forEach(k => {
+    const el = document.getElementById('nl-' + k);
+    if (el) el.className = 'nl' + (pageId === 'page-' + k || pageId.startsWith('page-event-detail') && k==='events' || pageId.startsWith('page-artist-detail') && k==='artists' ? ' act' : '');
+  });
+  updateDaysBadges();
+}
+
+function updateDaysBadges() {
+  const today = new Date(); today.setHours(0,0,0,0);
+  document.querySelectorAll('.d-badge[data-date]').forEach(badge => {
+    const ev = new Date(badge.dataset.date + 'T00:00:00');
+    const d = Math.round((ev - today) / 86400000);
+    const num = badge.querySelector('.d-num');
+    const away = badge.querySelector('.d-away');
+    const dt = badge.querySelector('.d-date');
+    if (num) num.textContent = d;
+    if (away) away.textContent = d === 1 ? 'day away' : 'days away';
+    if (dt) { const evd = new Date(badge.dataset.date + 'T00:00:00'); dt.textContent = evd.toLocaleString('en-US',{month:'short'}).toUpperCase() + ' ' + evd.getDate(); }
+    badge.classList.remove('badge-now','badge-soon','badge-far');
+    badge.classList.add(d <= 14 ? 'badge-now' : d <= 50 ? 'badge-soon' : 'badge-far');
+  });
+  document.querySelectorAll('.days-tag[data-date]').forEach(span => {
+    const ev = new Date(span.dataset.date + 'T00:00:00');
+    const d = Math.round((ev - today) / 86400000);
+    span.textContent = 'In ' + d + ' days';
+  });
+}
+
+function filterPage(pageId, topic) {
+  const page = document.getElementById(pageId);
+  if (!page) return;
+  page.querySelectorAll('[data-topics]').forEach(card => {
+    card.style.display = (!topic || card.dataset.topics.split(',').includes(topic)) ? '' : 'none';
+  });
+  page.querySelectorAll('.fpill').forEach(pill => {
+    const onclick = pill.getAttribute('onclick') || '';
+    const isAll = onclick.includes('null') || onclick.includes("filterPage('" + pageId + "',null)");
+    const isMatch = topic ? onclick.includes("'" + topic + "'") : isAll;
+    pill.classList.toggle('act', isMatch);
+  });
+}
+
+function carMove(d) { carIdx = (carIdx + d + 4) % 4; updateCar(); }
+function carGo(i) { carIdx = i; updateCar(); }
+function updateCar() {
+  const t = document.getElementById('carTrack');
+  const dots = document.querySelectorAll('.cdot');
+  if (t) t.style.transform = 'translateX(-' + (carIdx * 100) + '%)';
+  dots.forEach((d, i) => d.className = 'cdot' + (i === carIdx ? ' act' : ''));
+}
+
+updateDaysBadges();
+</script>
+</body>
+</html>
